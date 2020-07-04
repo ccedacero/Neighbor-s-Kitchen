@@ -146,30 +146,30 @@ end
   
 # # will use for generating random user order combinations later
 
-# def seed_orders
+def seed_orders
 
-# def gen_10_nums
-#     arr = []
-#     while arr.size < 10
-#       arr << rand(0..9)
-#       arr.uniq!
-#     end
-#     arr
-#   end
+def gen_10_nums
+    arr = []
+    while arr.size < 10
+      arr << rand(0..9)
+      arr.uniq!
+    end
+    arr
+  end
 
-#   i = 0
-#   10.times do
-#     arr = gen_10_nums
-#     byebug
-#     kitchen = Kitchen.all.map(&:id)
-#     users = User.all.map(&:id)
-#     total_price = Random.rand(6..35)
-#     date = DateTime.now
-#     Order.create(date: date, total_price: total_price, user_id: users[arr[i]], kitchen_id: kitchen[arr[i]])
-#     i += 1
-#   end
-# end
-# seed_orders()
+  i = 0
+  10.times do
+    arr = gen_10_nums
+    byebug
+    kitchen = Kitchen.all.map(&:id)
+    users = User.all.map(&:id)
+    total_price = Random.rand(6..35)
+    date = DateTime.now
+    Order.create(date: date, total_price: total_price, user_id: users[arr[i]], kitchen_id: kitchen[arr[i]])
+    i += 1
+  end
+end
+seed_orders()
 
 # # ny_address = 
 # # [
