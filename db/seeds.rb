@@ -1,13 +1,14 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 require 'faker'
-# User.destroy_all
-# Kitchen.destroy_all
-# Menu.destroy_all
-# Order.destroy_all
-# User.destroy_all
-# Food.destroy_all
-ny_address = [
+
+User.destroy_all
+Food.destroy_all
+Menu.destroy_all
+Kitchen.destroy_all
+Order.destroy_all
+
+NY_ADDRESS = [
   "7909 Princess St.\nBrooklyn, NY 11203",
   "41 Argyle St.\nBrooklyn, NY 11213",
   "54 Talbot Rd.\nSouth Richmond Hill, NY 11419",
@@ -131,90 +132,96 @@ ny_address = [
   "3 8th Ave.\nBuffalo, NY 14215"
 ]
 
-def filter_nyc_addresses(arr) 
-   arr = arr.map do |addr|  
-  addr.slice(-10)
-  byebug
+# def filter_nyc_addresses(arr) 
+#    arr = arr.map do |addr|  
+#   addr.slice(-10)
+#   # byebug
+#   end
+# end 
+
+# filter_nyc_addresses(ny_address)
+
+
+
+def seed_users
+  addressList = NY_ADDRESS.shuffle
+    10.times do |i|
+      name = Faker::Name.unique.first_name
+      last = Faker::Name.unique.last_name
+      full_name = name + " " + last
+      username = name[0] + last
+      username.downcase!
+      location = addressList[i]
+      User.create(
+        username: username, 
+        location: location
+      )
+    #   address = Faker::Address.city
+    end
+end
+
+seed_users()
+
+def seed_kitchens
+    addressList = NY_ADDRESS.shuffle
+    food_types = ['Indonesian','Turkish','Thai','Spanish','Moroccan','Japanese','Indian','Italian','French','Chinese','Korean','Peruvian','Ecuadorian','Guatemalan'];
+    10.times do |i|
+    username = Faker::Restaurant.name;
+    description = Faker::Restaurant.description;
+    location = addressList[i]
+    food_type = food_types[rand(0..food_types.length)];
+    
+    Kitchen.create(
+      username: username, 
+      description: description, 
+      location: location,
+      food_type: food_type
+    )
   end
-end 
+end
+seed_kitchens()
 
-filter_nyc_addresses(ny_address)
+def seed_orders 
+    10.times do 
+      total_price = Random.rand(6..35)
+      date = DateTime.now
+    end
+end
+seed_orders()
 
+def seed_menus 
+  kitchen_ids = Kitchen.all.ids.shuffle
+  10.times do |i|
+      date = Faker::Date.forward(days: 23);
+      Menu.create(
+        date: date,
+        kitchen_id: kitchen_ids[i]
+      )
+  end
+end
+seed_menus() 
 
+def seed_foods 
+  menu_ids = Menu.all.ids.shuffle
+  10.times do |i|
+    name = Faker::Food.dish;
+    description = Faker::Food.description;
+    price = Random.rand(2..20);
+    img_src = "http://lorempixel.com/640/480/food";
+    availability = false;
+    
+    Food.create(
+      name: name, 
+      description: description, 
+      price: price, 
+      img_src: img_src, 
+      availability: availability,
+      menu_id: menu_ids[i]
+    )
+  end
+end
+seed_foods()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def seed_users
-#     10.times do
-#       name = Faker::Name.unique.first_name
-#       last = Faker::Name.unique.last_name
-#       full_name = name + " " + last
-#       username = name[0] + last
-#       username.downcase!
-#     #   address = Faker::Address.city
-#     end
-#   end
-# #   seed_users
-
-# def seed_kitchens
-#     food_types = ['Indonesian','Turkish','Thai','Spanish','Moroccan','Japanese','Indian','Italian','French','Chinese','Korean','Peruvian','Ecuadorian','Guatemalan'];
-#     10.times do 
-#     username = Faker::Restaurant.name;
-#     description = Faker::Restaurant.description;
-#     location = 'TBD';
-#     food_type = food_types[rand(0..food_types.length)];
-#   end
-# end
-# seed_kitchens()
-
-# def seed_orders 
-#     10.times do 
-#       total_price = Random.rand(6..35)
-#       date = DateTime.now
-#     end
-# end
-# seed_orders()
-
-
-# def seed_foods 
-#     10.times do 
-# name = Faker::Food.dish;
-# description = Faker::Food.description;
-# price = Random.rand(2..20);
-# img_src = "";
-# availability = false;
-#   end
-# end
-# seed_foods()
-
-# def seed_menus 
-#     10.times do 
-#         date = Faker::Date.forward(days: 23);
-#     end
-# end
-# seed_menus 
-  
 # # will use for generating random user order combinations later
 # # def gen_10_nums
 # #     arr = []
