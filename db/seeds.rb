@@ -7,6 +7,8 @@ require 'faker'
 # Order.destroy_all
 # User.destroy_all
 # Food.destroy_all
+
+# new line version / html version at the end of file
 ny_address = [
   "7909 Princess St.\nBrooklyn, NY 11203",
   "41 Argyle St.\nBrooklyn, NY 11213",
@@ -133,7 +135,7 @@ ny_address = [
 
 def filter_nyc_addresses(arr) 
    arr = arr.map do |addr|  
-  addr.slice(-10)
+  
   byebug
   end
 end 
