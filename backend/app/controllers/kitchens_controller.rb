@@ -1,18 +1,17 @@
 class KitchensController < ApplicationController
     
-    # GET /kitchens
+    # GET /kitchen
     def index 
         kitchens = Kitchen.all;
         render json: kitchens; 
     end
 
-    # GET /kitchens/1
+    # GET /kitchen/1
     def  show
-        kitchen = set_kitchen
         render json: kitchen
     end
 
-    # POST /kitchens
+    # POST /kitchen
     def create
         kitchen = Kitchen.new(kitchen_params)
 
@@ -23,7 +22,7 @@ class KitchensController < ApplicationController
         end
     end
 
-    # PATCH/PUT /kitchens/1
+    # PATCH/PUT /kitchen/1
     def update
         if kitchen.update(kitchen_params)
         render json: kitchen
@@ -32,7 +31,7 @@ class KitchensController < ApplicationController
         end
     end
 
-    # DELETE /kitchens/1
+    # DELETE /kitchen/1
     def  destroy
         kitchen.destroy
     end

@@ -2,35 +2,27 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 require 'faker'
 
-# User.destroy_all
-# Food.destroy_all
-# Menu.destroy_all
-# Kitchen.destroy_all
-# Order.destroy_all
+
+User.destroy_all
+Food.destroy_all
+Menu.destroy_all
+Kitchen.destroy_all
+Order.destroy_all
 
 NY_ADDRESS = [
   "7909 Princess St.\nBrooklyn, NY 11203",
   "41 Argyle St.\nBrooklyn, NY 11213",
-  "54 Talbot Rd.\nSouth Richmond Hill, NY 11419",
   "459 Lafayette St.\nBrooklyn, NY 11230",
-  "7710 Halifax Drive\nHuntington Station, NY 11746",
   "61 E. Canterbury St.\nBronx, NY 10453",
   "7619 Somerset Street\nBrooklyn, NY 11215",
   "2 Armstrong St.\nNew York, NY 10028",
-  "66 North Hilltop Drive\nJamestown, NY 14701",
   "8586 Arcadia St.\nStaten Island, NY 10314",
   "24 Academy Ave.\nBrooklyn, NY 11201",
   "25 S. Railroad Avenue\nNew York, NY 10027",
   "87 E. Galvin St.\nWoodside, NY 11377",
   "842 Sheffield Drive\nForest Hills, NY 11375",
   "8942 Vale Dr.\nRidgewood, NY 11385",
-  "172 Somerset Lane\nFairport, NY 14450",
-  "9019 Tunnel St.\nMassapequa, NY 11758",
-  "582 Amerige Drive\nBrentwood, NY 11717",
   "8238 River St.\nBrooklyn, NY 11214",
-  "285 Augusta Lane\nRego Park, NY 11374",
-  "25 Wayne Drive\nAuburn, NY 13021",
-  "26 Manor Ave.\nBay Shore, NY 11706",
   "7562 East Cambridge Ave.\nBrooklyn, NY 11228",
   "9641 Arcadia Court\nBronx, NY 10458",
   "287 West Pacific Street\nBronx, NY 10451",
@@ -40,28 +32,20 @@ NY_ADDRESS = [
   "488 Pilgrim St.\nCorona, NY 11368",
   "140 Cedarwood Street\nNew York, NY 10128",
   "9099 Baker St.\nBrooklyn, NY 11208",
-  "7623 Glenridge St.\nSpring Valley, NY 10977",
   "63 South Wrangler Lane\nBronx, NY 10466",
   "55 N. Wintergreen Court\nNew York, NY 10024",
-  "386 Bank St.\nRome, NY 13440",
   "168 Princess Avenue\nJackson Heights, NY 11372",
-  "2 NW. Creek Drive\nLockport, NY 14094",
   "8731 S. Clay St.\nBrooklyn, NY 11209",
   "7 Bradford Drive\nBrooklyn, NY 11204",
   "8640 Oakland Dr.\nNew York, NY 10003",
   "577 W. Hillcrest St.\nNew York, NY 10029",
-  "737 Deerfield Street\nIthaca, NY 14850",
   "99 Briarwood Street\nFlushing, NY 11355",
   "323 Bradford St.\nBrooklyn, NY 11206",
-  "917 East Halifax Street\nPoughkeepsie, NY 12603",
-  "9704 North Smoky Hollow Road\nLindenhurst, NY 11757",
   "8245 Tower Ave.\nSuite 516\nBronx, NY 10468",
   "77 Anderson Lane\nAstoria, NY 11103",
   "712 Mountainview Ave.\nBrooklyn, NY 11218",
-  "48 South Division Drive\nNorth Tonawanda, NY 14120",
   "540 Evergreen St.\nBrooklyn, NY 11216",
   "3 W. Sherman Lane\nNew York, NY 10009",
-  "8677 Berkshire Road\nHuntington, NY 11743",
   "9650 Rockland St.\nBrooklyn, NY 11225",
   "7752 Arlington Ave.\nBrooklyn, NY 11221",
   "897 Livingston St.\nBrooklyn, NY 11211",
@@ -71,25 +55,17 @@ NY_ADDRESS = [
   "22 Glendale Street\nBrooklyn, NY 11220",
   "6 Rocky River Dr.\nBrooklyn, NY 11212",
   "443 College Lane\nBrooklyn, NY 11207",
-  "22 North Brickell Drive\nFresh Meadows, NY 11365",
-  "83 Pierce Dr.\nNewburgh, NY 12550",
-  "62 4th St.\nTonawanda, NY 14150",
   "747 Holly Road\nNew York, NY 10025",
   "9674 State Street\nJamaica, NY 11434",
   "87 N. Academy St.\nBrooklyn, NY 11210",
   "121 Park Rd.\nBrooklyn, NY 11238",
-  "8846 Glenholme Court\nLevittown, NY 11756",
-  "9335 Race Ave.\nEndicott, NY 13760",
-  "9933 Armstrong Ave.\nElmont, NY 11003",
   "9639 Parker Street\nAstoria, NY 11106",
   "606 Devon Dr.\nBrooklyn, NY 11219",
   "1 Grove Drive\nBronx, NY 10463",
-  "8869 North Wentworth St.\nNew York, NY 10011",
   "7 Adams St.\nSouth Ozone Park, NY 11420",
   "7317 Young Street\nSuite 7\nAstoria, NY 11105",
   "78 Foxrun Dr.\nBronx, NY 10473",
   "601 Andover Court\nJamaica, NY 11435",
-  "228 West El Dorado St.\nPoughkeepsie, NY 12601",
   "7380 Tarkiln Hill Ave.\nFar Rockaway, NY 11691",
   "9362 Elizabeth Ave.\nStaten Island, NY 10306",
   "54 Longfellow Rd.\nBrooklyn, NY 11236",
@@ -97,47 +73,30 @@ NY_ADDRESS = [
   "9141 N. Bank St.\nBronx, NY 10460",
   "9283 Bald Hill Drive\nNew York, NY 10031",
   "9733 Academy St.\nBronx, NY 10452",
-  "9696 North William Lane\nMiddletown, NY 10940",
+];
+
+kitchen_addr = [
   "64 West Kirkland Ave.\nNew York, NY 10016",
   "641 Adams Road\nBrooklyn, NY 11233",
   "7400 Rockaway Ave.\nBronx, NY 10456",
-  "59 Hill Lane\nRochester, NY 14609",
   "259 Chestnut Street\nBronx, NY 10465",
   "653 Market St.\nNew York, NY 10002",
-  "48 High Point Lane\nTroy, NY 12180",
-  "60 South Overlook Street\nHamburg, NY 14075",
-  "69 Talbot Court\nWestbury, NY 11590",
   "128 El Dorado Road\nBrooklyn, NY 11223",
-  "742 Old Cedarwood Rd.\nYonkers, NY 10701",
   "27 Old York St.\nBronx, NY 10462",
-  "826 Anderson St.\nFreeport, NY 11520",
   "9202 Fordham Street\nBrooklyn, NY 11235",
   "93 State Drive\nBronx, NY 10472",
   "8444 Park Rd.\nNew York, NY 10040",
-  "7783 Sherwood Dr.\nHempstead, NY 11550",
-  "910 E. White Dr.\nBuffalo, NY 14221",
   "60 Glenlake Dr.\nBronx, NY 10469",
   "651 Garfield Street\nFlushing, NY 11354",
   "136 Lancaster Rd.\nBronx, NY 10457",
-  "718 Griffin Street\nBuffalo, NY 14224",
-  "10 Lakeview St.\nWebster, NY 14580",
   "97 Wayne Avenue\nPatchogue, NY 11772",
   "533 East Academy Lane\nStaten Island, NY 10312",
   "715 Lake Drive\nEast Elmhurst, NY 11370",
   "71 Jones Rd.\nBronx, NY 10461",
-  "643 Arcadia Rd.\nWest Babylon, NY 11704",
   "622 Marshall Drive\nJamaica, NY 11432",
   "7374 North Elmwood St.\nBrooklyn, NY 11224",
   "56 Pilgrim Drive\nNew York, NY 10034",
-  "3 8th Ave.\nBuffalo, NY 14215"
 ]
-
-kitchen_addr = [
-
-]
-
-
-
 
 # def filter_nyc_addresses(arr) 
 #    arr = arr.map do |addr|  
@@ -150,9 +109,9 @@ kitchen_addr = [
 
 
 
-def seed_users
+def seed_users 
   addressList = NY_ADDRESS.shuffle
-    10.times do |i|
+    10.times do |i| 
       name = Faker::Name.unique.first_name
       last = Faker::Name.unique.last_name
       full_name = name + " " + last
@@ -228,26 +187,61 @@ def seed_foods
   end
 end
 seed_foods()
+   # seed_users(ny_address)
+
+def seed_kitchens(kitchen_addr)
+    food_types = ['Indonesian','Turkish','Thai','Spanish','Moroccan','Japanese','Indian','Italian','French','Chinese','Korean','Peruvian','Ecuadorian','Guatemalan','Fusion'];
+    10.times do 
+    username = Faker::Restaurant.name;
+    description = Faker::Restaurant.description;
+    location = kitchen_addr[rand(0..kitchen_addr.length)];
+    food_type = food_types[rand(0..food_types.length)];
+    Kitchen.create(username: username, description: description, location:location, food_type:food_type)
+  end
+end
+# seed_kitchens(kitchen_addr)
+# 
+# seed_orders()
+
+
+# def seed_foods 
+#     10.times do 
+# name = Faker::Food.dish;
+# description = Faker::Food.description;
+# price = Random.rand(2..20);
+# img_src = "";
+# availability = false;
+#   end
+# end
+# seed_foods()
+
 
 # # will use for generating random user order combinations later
-# # def gen_10_nums
-# #     arr = []
-# #     while arr.size < 10
-# #       arr << rand(0..9)
-# #       arr.uniq!
-# #     end
-# #     arr
-# #   end
-  
-# #   i = 0
-# #   10.times do
-# #     arr = gen_10_nums
-# #     recipe = Recipe.all.map(&:id)
-# #     users = User.all.map(&:id)
-# #     Favorite.create(user_id: users[arr[i]], recipe_id: recipe[arr[i]])
-# #     i += 1
-# #   end
 
+def seed_orders
+
+def gen_10_nums
+    arr = []
+    while arr.size < 10
+      arr << rand(0..9)
+      arr.uniq!
+    end
+    arr
+  end
+
+  i = 0
+  10.times do
+    arr = gen_10_nums
+    byebug
+    kitchen = Kitchen.all.map(&:id)
+    users = User.all.map(&:id)
+    total_price = Random.rand(6..35)
+    date = DateTime.now
+    Order.create(date: date, total_price: total_price, user_id: users[arr[i]], kitchen_id: kitchen[arr[i]])
+    i += 1
+  end
+end
+seed_orders()
 
 # # ny_address = 
 # # [
