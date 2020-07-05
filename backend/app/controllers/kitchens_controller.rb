@@ -8,6 +8,7 @@ class KitchensController < ApplicationController
 
     # GET /kitchen/1
     def  show
+        kitchen = set_kitchen
         render json: kitchen
     end
 
