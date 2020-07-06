@@ -106,13 +106,18 @@ def seed_users
     10.times do |i| 
       name = Faker::Name.unique.first_name
       last = Faker::Name.unique.last_name
+      email = Faker::Internet.email 
+      phone = Faker::PhoneNumber.cell_phone
+
       full_name = name + " " + last
       username = name[0] + last
       username.downcase!
       location = addressList[i]
       User.create(
-        username: username, 
-        location: location
+        name: username, 
+        location: location,
+        email: email,
+        phone: phone
       )
     end
 end
@@ -124,6 +129,8 @@ def seed_kitchens(kitchen_addr)
     10.times do |i|
     username = Faker::Restaurant.name;
     description = Faker::Restaurant.description;
+    phone = Faker::PhoneNumber.cell_phone
+    img_src = "http://lorempixel.com/640/480/food";
     location = addressList[i]
     food_type = food_types[rand(0..food_types.length)];
     
@@ -131,7 +138,9 @@ def seed_kitchens(kitchen_addr)
       username: username, 
       description: description, 
       location: location,
-      food_type: food_type
+      food_type: food_type,
+      phone: phone,
+      img_src: img_src
     )
   end
 end
@@ -153,25 +162,49 @@ seed_menus()
 def seed_foods 
   menu_ids = Menu.all.ids.shuffle
   10.times do |i|
-    name = Faker::Food.dish;
-    description = Faker::Food.description;
-    price = Random.rand(2..20);
-    img_src = "http://lorempixel.com/640/480/food";
-    availability = false;
-    
-    Food.create(
-      name: name, 
-      description: description, 
-      price: price, 
-      img_src: img_src, 
-      availability: availability,
-      menu_id: menu_ids[i]
-    )
+    5.times do |j|
+      name = Faker::Food.dish;
+      description = Faker::Food.description;
+      price = Random.rand(2..20);
+      img_src = "http://lorempixel.com/640/480/food";
+      availability = [true, false].sample;
+      Food.create(
+        name: name, 
+        description: description, 
+        price: price, 
+        img_src: img_src, 
+        availability: availability,
+        menu_id: menu_ids[i]
+      )
+    end
   end
 end
 seed_foods()
 
-def seed_order 
-  date = DateTime.now;
-end 
 
+def seed_orders
+  kitchen_ids = Kitchen.all.ids.shuffle
+  user_ids = User.all.ids.shuffle
+  10.times do |i|
+    total_price = Random.rand(6..35)
+    date = DateTime.now
+    Order.create(
+      date: date,
+      total_price: total_price,
+      user_id: users_ids[i],
+      kitchen_id: kitchen_ids[i]
+      )
+  end
+end
+seed_orders()
+
+def seed_food_orders
+  food_ids = Food.all.ids.shuffle
+  order_ids = Order.all.ids.shuffle
+  10.times do |i|
+    FoodOrder.create(
+      food_id: food_ids[i],
+      order_id: order_ids[i]
+    )
+  end
+end
