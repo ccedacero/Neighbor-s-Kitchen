@@ -1,5 +1,9 @@
 const selectOptions = document.querySelector("#kitchens");
 const kitchenMenu = document.querySelector(".kitchen-menu");
+
+
+
+
 fetch('http://localhost:3000/kitchens/')
     .then(resp => resp.json())
     .then(kitchens => {

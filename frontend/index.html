@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
     <script src="./index.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
-    <!-- <div class="card">
-
-  </div> -->
+    <
     <form id="order-form" action="" method="post">
         <fieldset>
             <label for="name" id="name-label">Name:</label>
@@ -21,14 +22,22 @@
             <label for="number" id="number-label">Phone:</label>
             <input type="tel" id="number" name="phone" placeholder="Phone Number" required max="99" min="1"><br><br>
         </fieldset>
-        <fieldset>
+        <!-- <fieldset> -->
             <h3>Kitchen Selection</h3>
             <label for="kitchens"> Choose a kitchen:</label>
-            <select name="kitchens" id="kitchens">
-                    </select>
-        </fieldset>
+            <div class="input-field col s12">
+                <select name="kitchens" id="kitchens" >
+                </select>
+            </div>
+        <!-- </fieldset> -->
         <div class="kitchen-menu">
         </div>
+    </form>
+
+    <div class="kitchens">
+
+    </div>
+   
 </body>
 
 </html>
