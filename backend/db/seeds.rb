@@ -170,3 +170,8 @@ def seed_foods
   end
 end
 seed_foods()
+
+def seed_order 
+  date = DateTime.now;
+end 
+
