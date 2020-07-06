@@ -41,11 +41,11 @@ function renderCard(kitchen) {
     foodType.textContent = kitchen.food_type;
     location.textContent = kitchen.location;
     description.textContent = kitchen.description;
-    // if (availability[0] === true) {
-    menuDiv.append(menuInput, menuSpan, menuDate, menuName, menuDescription);
-    kitchenMenu.append(menuDiv);
-    menuDiv.style.display = "none";
-    // }
+    if (availability[0] === true) {
+        menuDiv.append(menuInput, menuSpan, menuDate, menuName, menuDescription);
+        kitchenMenu.append(menuDiv);
+        menuDiv.style.display = "none";
+    }
     // card.append(username,foodType,location,description,foodImage);
     // <option value="Restaurant">Restaurant</option>
     selectOptions.append(selectOpt);
