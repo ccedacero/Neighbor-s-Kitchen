@@ -2,12 +2,13 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 require 'faker'
 
-
+FoodOrder.destroy_all
+Order.destroy_all
 User.destroy_all
 Food.destroy_all
 Menu.destroy_all
 Kitchen.destroy_all
-Order.destroy_all
+
 
 NY_ADDRESS = [
   "7909 Princess St.\nBrooklyn, NY 11203",
@@ -123,28 +124,29 @@ def seed_users
 end
 seed_users()
 
+# food_types = ['Indonesian','Turkish','Thai','Spanish','Moroccan','Japanese','Indian','Italian','French','Chinese','Korean','Peruvian','Ecuadorian','Guatemalan'];
 def seed_kitchens(kitchen_addr)
     addressList = kitchen_addr.shuffle
-    food_types = ['Indonesian','Turkish','Thai','Spanish','Moroccan','Japanese','Indian','Italian','French','Chinese','Korean','Peruvian','Ecuadorian','Guatemalan'];
+    food_types = ['Asian','Middle Eastern','Indian','Italian','Amerian', 'Caribbean'];
     10.times do |i|
-    username = Faker::Restaurant.name;
-    description = Faker::Restaurant.description;
-    phone = Faker::PhoneNumber.cell_phone
-    img_src = "http://lorempixel.com/640/480/food";
-    location = addressList[i]
-    food_type = food_types[rand(0..food_types.length)];
-    
-    Kitchen.create(
-      username: username, 
-      description: description, 
-      location: location,
-      food_type: food_type,
-      phone: phone,
-      img_src: img_src
-    )
+      username = Faker::Restaurant.name;
+      description = Faker::Restaurant.description;
+      phone = Faker::PhoneNumber.cell_phone
+      img_src = "http://lorempixel.com/640/480/food";
+      location = addressList[i]
+      food_type = food_types[rand(0..food_types.length)];
+      
+      Kitchen.create(
+        username: username, 
+        description: description, 
+        location: location,
+        food_type: food_type,
+        phone: phone,
+        img_src: img_src
+      )
   end
 end
-seed_kitchens()
+seed_kitchens(kitchen_addr)
 
 
 def seed_menus 
@@ -191,7 +193,7 @@ def seed_orders
     Order.create(
       date: date,
       total_price: total_price,
-      user_id: users_ids[i],
+      user_id: user_ids[i],
       kitchen_id: kitchen_ids[i]
       )
   end
@@ -208,3 +210,4 @@ def seed_food_orders
     )
   end
 end
+seed_food_orders()
