@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./index.js"defer ></script>
-  <title>Document</title>
-</head>
-<body>
-  <div class="card">
 
-  </div>
-  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div class="card">
+
+  </div> -->
+    <form id="order-form" action="" method="post">
+        <fieldset>
+            <label for="name" id="name-label">Name:</label>
+            <input type="text" name="name" id="name" placeholder="Enter your Name" required><br>
+            <label for="email" id="email-label">Email:</label>
+            <input type="email" name="email" type="text" id="email" placeholder="Enter your Email" required><br>
+            <label for="number" id="number-label">Phone:</label>
+            <input type="tel" id="number" name="phone" placeholder="Phone Number" required max="99" min="1"><br><br>
+        </fieldset>
+        <fieldset>
+            <h3>Kitchen Selection</h3>
+            <label for="kitchens"> Choose a kitchen:</label>
+            <select name="kitchens" id="kitchens">
+                    </select>
+        </fieldset>
+        <div class="kitchen-menu">
+        </div>
 </body>
+
 </html>
