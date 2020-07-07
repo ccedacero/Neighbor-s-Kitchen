@@ -62,7 +62,7 @@ kitchenContainer.append(kitchenDiv);
 
 
 
-
+        let totalPrice =  0; 
 
 
 function renderOrder(collapsedDiv) {
@@ -71,9 +71,10 @@ collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
                                 <h5 class="card-title">Cart</h5>
                                 <ul class="foodList">
                                 </ul>
+                                <div class="totalPrice">
+                                </div>
                             </div>`
 }
-
 function renderFood(foodContainer, kitchen,displayContainer,collapsedDiv) {
     kitchen.menu.foods.forEach((food) => {
         foodContainer.innerHTML += `<div class="col-3 p-1">
@@ -93,6 +94,8 @@ function renderFood(foodContainer, kitchen,displayContainer,collapsedDiv) {
      })
     foodContainer.addEventListener('click', (event) => {
         const foodUl = displayContainer.querySelector('.foodList');
+        const totalDiv = document.createElement('div');
+
         if (event.target.tagName === 'BUTTON') {
             
             $(collapsedDiv).collapse({
@@ -101,9 +104,13 @@ function renderFood(foodContainer, kitchen,displayContainer,collapsedDiv) {
             const id = parseInt(event.target.closest('.card-body').dataset.id);
             const foodName = event.target.parentElement.firstElementChild.innerText;
             const foodPrice = parseFloat(event.target.parentElement.children[2].innerText.split('$')[1]);
+            totalPrice += foodPrice;
             const foodLi = document.createElement('li');
-            foodLi.innerText = foodName +' '+foodPrice; 
+            foodLi.innerText = foodName +' '+'$'+foodPrice; 
             foodUl.append(foodLi); 
+            let taxes = parseFloat((totalPrice/100) * 8.875).toFixed(2);
+            event.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild.innerHTML = 
+            `<h6>Order Total: $${totalPrice} <br> Taxes: $${taxes}<br><hr><strong>Subtotal:$${parseFloat(taxes) + totalPrice}</strong></h6>`;
         }
     })
   } 
