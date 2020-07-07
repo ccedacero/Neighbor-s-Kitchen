@@ -164,7 +164,7 @@ seed_menus()
 def seed_foods 
   menu_ids = Menu.all.ids.shuffle
   10.times do |i|
-    5.times do |j|
+    4.times do |j|
       name = Faker::Food.dish;
       description = Faker::Food.description;
       price = Random.rand(2..20);
