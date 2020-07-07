@@ -1,3 +1,24 @@
 #order-form{
   margin: 5em;
 }
+
+.kitchenImg, .card-img-wide{
+  width: 100%;
+  height: 200px;
+  flex: none;
+}
+
+.card-img-wide{
+  object-fit: cover;
+}
+
+.addFood{
+  background-color: lightgray;
+}
+
+.addFood:hover{
+  background-color: greenyellow;
+}
+.fa-utensils:hover {
+  color: green;
+}
