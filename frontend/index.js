@@ -1,6 +1,12 @@
 const selectOptions = document.querySelector("#kitchens");
 const kitchenMenu = document.querySelector(".kitchen-menu");
 
+// We need to display the following food cards with the following info: Food Name Description Price Available we don't need to add the kitchen that doesn’t have any available food
+
+
+//1. Get the container 
+//2. Create kitchen card 
+//3, Get information from kitchen(username, description);
 
 
 
@@ -14,48 +20,73 @@ fetch('http://localhost:3000/kitchens/')
     })
 
 function renderCard(kitchen) {
-    let availability = filter_available(kitchen)
-    const card = document.createElement('div');
-    card.className = 'card';
-    const username = document.createElement('h3');
-    const foodType = document.createElement('h5');
-    const location = document.createElement('p');
-    const description = document.createElement('p');
-    const foodImage = document.createElement('img');
-    const selectOpt = document.createElement('option');
-    const menuDate = document.createElement('h6');
-    const menuName = document.createElement('h6');
-    const menuDescription = document.createElement('p');
-    const menuInput = document.createElement('input');
-    const menuSpan = document.createElement('span');
-    const menuDiv = document.createElement('div');
-    menuDiv.className = "menu";
-    menuDiv.dataset.id = kitchen.id;
-    menuSpan.textContent = "Add to cart";
-    menuInput.type = "checkbox";
-    menuInput.value = kitchen.menu.foods[0].name;
-    menuDate.textContent = kitchen.menu.foods[0].date;
-    menuName.textContent = kitchen.menu.foods[0].name;
-    menuDescription.textContent = kitchen.menu.foods[0].description;
-    selectOpt.value = kitchen.username
-    selectOpt.dataset.id = kitchen.id;
-    selectOpt.textContent = kitchen.username;
-    foodImage.src = kitchen.menu.foods[0].img_src;
-    username.textContent = kitchen.username;
-    foodType.textContent = kitchen.food_type;
-    location.textContent = kitchen.location;
-    description.textContent = kitchen.description;
-    if (availability[0] === true) {
-        menuDiv.append(menuInput, menuSpan, menuDate, menuName, menuDescription);
-        kitchenMenu.append(menuDiv);
-        menuDiv.style.display = "none";
-    }
-    // card.append(username,foodType,location,description,foodImage);
-    // <option value="Restaurant">Restaurant</option>
-    selectOptions.append(selectOpt);
-    // document.body.append(card);
-    // document.body.append(card);
+
+    const kitchenContainer = document.querySelector(".kitchens");
+    const kitchenDiv = document.createElement('div');
+    kitchenDiv.className = "kitchen row mb-5";
+    // debugger 
+    kitchenDiv.dataset.id = kitchen.id; 
+    kitchenDiv.innerHTML +=
+        `<div class="card border-secondary row-cols-1" >
+        <div class="row no-gutters">
+            <div class="kitchenImg">
+                <img src=${kitchen.img_src} class="card-img-top card-img-wide" alt="..." >
+            </div>
+            <div class="col-md-12">
+                <div class="kitchenInfo card-body">
+                    <h5 class="card-title">${kitchen.username}</h5>
+                    <p class="card-text">${kitchen.description}</p>
+                </div>
+            <hr class="my-2">
+                <div class="foodContainer card-body"> 
+                    <div class="row foods">
+                    </div>
+               </div>
+          </div>
+        </div>
+      </div>`
+const foodContainer = kitchenDiv.querySelector(".foods");
+renderFood(foodContainer,kitchen) 
+kitchenContainer.append(kitchenDiv);
+console.log(kitchen.menu.foods[0].price + 10);
 }
+
+
+function renderFood(foodContainer, kitchen) {
+    kitchen.menu.foods.forEach((food) => {
+        foodContainer.innerHTML += `<div class="col-3 p-1">
+                                    <div class="card ">
+                                        <img src=${food.img_src} class="card-img-top" alt="...">
+                                        <hr class="m-0">
+                                        <div class="card-body">
+                                            <h6 class="foodName font-weight-bold mb-1">${food.name}</h6>
+                                            <p class="foodDesc mb-0">${food.description}</p>
+                                            <h6 class="foodName font-weight-bold mb-1">${food.price}</h6>
+                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
+                                                <i class="fas fa-utensils "></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>`
+     })
+  } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 selectOptions.addEventListener('change', (e) => {
     const name = e.target.value
