@@ -46,29 +46,66 @@ function renderCard(kitchen) {
         </div>
       </div>`
 const foodContainer = kitchenDiv.querySelector(".foods");
-renderFood(foodContainer,kitchen) 
+const displayContainer = kitchenDiv.querySelector(".foodContainer");
+const collapsedDiv = document.createElement('div');
+collapsedDiv.className = "collapse";
+collapsedDiv.id = 'collapseList';
+renderFood(foodContainer,kitchen,displayContainer,collapsedDiv); 
+renderOrder(collapsedDiv);
+displayContainer.append(collapsedDiv);
 kitchenContainer.append(kitchenDiv);
-console.log(kitchen.menu.foods[0].price + 10);
+
 }
 
 
-function renderFood(foodContainer, kitchen) {
+
+
+
+
+
+
+
+function renderOrder(collapsedDiv) {
+collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
+                            <div class="addedFoods card-body">
+                                <h5 class="card-title">Cart</h5>
+                                <ul class="foodList">
+                                </ul>
+                            </div>`
+}
+
+function renderFood(foodContainer, kitchen,displayContainer,collapsedDiv) {
     kitchen.menu.foods.forEach((food) => {
         foodContainer.innerHTML += `<div class="col-3 p-1">
-                                    <div class="card ">
+                                    <div class="card h-100">
                                         <img src=${food.img_src} class="card-img-top" alt="...">
                                         <hr class="m-0">
-                                        <div class="card-body">
+                                        <div class="card-body" data-id = "${food.id}">
                                             <h6 class="foodName font-weight-bold mb-1">${food.name}</h6>
                                             <p class="foodDesc mb-0">${food.description}</p>
-                                            <h6 class="foodName font-weight-bold mb-1">${food.price}</h6>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
+                                            <h6 class="foodPrice font-weight-bold mb-1">Price: $${food.price}</h6>
+                                            <button type="button" class="addFood btn btn-default float-right" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
                                                 <i class="fas fa-utensils "></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>`
      })
+    foodContainer.addEventListener('click', (event) => {
+        const foodUl = displayContainer.querySelector('.foodList');
+        if (event.target.tagName === 'BUTTON') {
+            
+            $(collapsedDiv).collapse({
+            show: true
+            })
+            const id = parseInt(event.target.closest('.card-body').dataset.id);
+            const foodName = event.target.parentElement.firstElementChild.innerText;
+            const foodPrice = parseFloat(event.target.parentElement.children[2].innerText.split('$')[1]);
+            const foodLi = document.createElement('li');
+            foodLi.innerText = foodName +' '+foodPrice; 
+            foodUl.append(foodLi); 
+        }
+    })
   } 
 
 
