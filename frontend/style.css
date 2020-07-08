@@ -22,3 +22,7 @@
 .fa-utensils:hover {
   color: green;
 }
+
+.totalPrice {
+  display: inline-grid;
+}
