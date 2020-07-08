@@ -22,3 +22,19 @@
 .fa-utensils:hover {
   color: green;
 }
+
+h5.card-title {
+  display: inline-block;
+}
+
+.card-img-overlay{
+  text-align: center;
+  line-height: 520px;
+}
+
+.empty-kitchen{
+  vertical-align: middle;
+  height: 500px;
+  width: 500px;
+  margin: auto;
+}

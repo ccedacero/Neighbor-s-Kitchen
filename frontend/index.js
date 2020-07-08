@@ -25,7 +25,7 @@ function renderCard(kitchen) {
     const kitchenDiv = document.createElement('div');
     kitchenDiv.className = "kitchen row mb-5";
     // debugger 
-    kitchenDiv.dataset.id = kitchen.id; 
+    kitchenDiv.dataset.id = kitchen.id;
     kitchenDiv.innerHTML +=
         `<div class="card border-secondary row-cols-1" >
         <div class="row no-gutters">
@@ -45,15 +45,15 @@ function renderCard(kitchen) {
           </div>
         </div>
       </div>`
-const foodContainer = kitchenDiv.querySelector(".foods");
-const displayContainer = kitchenDiv.querySelector(".foodContainer");
-const collapsedDiv = document.createElement('div');
-collapsedDiv.className = "collapse";
-collapsedDiv.id = 'collapseList';
-renderFood(foodContainer,kitchen,displayContainer,collapsedDiv); 
-renderOrder(collapsedDiv);
-displayContainer.append(collapsedDiv);
-kitchenContainer.append(kitchenDiv);
+    const foodContainer = kitchenDiv.querySelector(".foods");
+    const displayContainer = kitchenDiv.querySelector(".foodContainer");
+    const collapsedDiv = document.createElement('div');
+    collapsedDiv.className = "collapse";
+    collapsedDiv.id = 'collapseList';
+    renderFood(foodContainer, kitchen, displayContainer, collapsedDiv);
+    renderOrder(collapsedDiv);
+    displayContainer.append(collapsedDiv);
+    kitchenContainer.append(kitchenDiv);
 
 }
 
@@ -66,7 +66,7 @@ kitchenContainer.append(kitchenDiv);
 
 
 function renderOrder(collapsedDiv) {
-collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
+    collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
                             <div class="addedFoods card-body">
                                 <h5 class="card-title">Cart</h5>
                                 <ul class="foodList">
@@ -74,7 +74,7 @@ collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
                             </div>`
 }
 
-function renderFood(foodContainer, kitchen,displayContainer,collapsedDiv) {
+function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
     kitchen.menu.foods.forEach((food) => {
         foodContainer.innerHTML += `<div class="col-3 p-1">
                                     <div class="card h-100">
@@ -90,23 +90,23 @@ function renderFood(foodContainer, kitchen,displayContainer,collapsedDiv) {
                                         </div>
                                     </div>
                                 </div>`
-     })
+    })
     foodContainer.addEventListener('click', (event) => {
         const foodUl = displayContainer.querySelector('.foodList');
         if (event.target.tagName === 'BUTTON') {
-            
+
             $(collapsedDiv).collapse({
-            show: true
+                show: true
             })
             const id = parseInt(event.target.closest('.card-body').dataset.id);
             const foodName = event.target.parentElement.firstElementChild.innerText;
             const foodPrice = parseFloat(event.target.parentElement.children[2].innerText.split('$')[1]);
             const foodLi = document.createElement('li');
-            foodLi.innerText = foodName +' '+foodPrice; 
-            foodUl.append(foodLi); 
+            foodLi.innerText = foodName + ' ' + foodPrice;
+            foodUl.append(foodLi);
         }
     })
-  } 
+}
 
 
 
