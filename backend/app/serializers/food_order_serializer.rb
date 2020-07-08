@@ -1,5 +1,5 @@
 class FoodOrderSerializer < ActiveModel::Serializer
   attributes :id
-  has_one :food
-  has_one :order
+  belongs_to :food
+  belongs_to :order
 end

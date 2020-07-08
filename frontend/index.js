@@ -95,9 +95,18 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
         event.target.parentElement.children[2].innerText.split("$")[1]
       );
       totalPrice += foodPrice;
+      let matches = document.querySelector(`li[data-id="${foodId}"]`);
+      if (matches) {
+          let foodCounter = parseInt(matches.dataset.counter) + 1;
+          matches.dataset.counter = foodCounter;
+       matches.innerText = `${foodName} $${foodPrice} (${foodCounter})`;
+      } else {
       const foodLi = document.createElement("li");
-      foodLi.innerText = foodName + " " + "$" + foodPrice;
+      foodLi.dataset.counter = 1;
+      foodLi.innerText = foodName + " " + "$" + foodPrice +"(1)";
+      foodLi.dataset.id = foodId;
       foodUl.append(foodLi);
+      }
       // Price Section
       let taxes = parseFloat((totalPrice / 100) * 8.875).toFixed(2);
       let subtotal = parseFloat(taxes) + totalPrice; 
@@ -180,3 +189,4 @@ function createOrder(resp,subtotal,kitchenId) {
      .then(resp => resp.json()).then(console.log)
     
 }
+ 
