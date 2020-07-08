@@ -17,23 +17,12 @@ fetch("http://localhost:3000/kitchens/")
   });
 
 function renderCard(kitchen) {
-<<<<<<< HEAD
   const kitchenContainer = document.querySelector(".kitchens");
   const kitchenDiv = document.createElement("div");
   kitchenDiv.className = "kitchen row mb-5";
   // debugger
   kitchenDiv.dataset.id = kitchen.id;
   kitchenDiv.innerHTML += `<div class="card border-secondary row-cols-1" >
-=======
-
-    const kitchenContainer = document.querySelector(".kitchens");
-    const kitchenDiv = document.createElement('div');
-    kitchenDiv.className = "kitchen row mb-5";
-    // debugger 
-    kitchenDiv.dataset.id = kitchen.id;
-    kitchenDiv.innerHTML +=
-        `<div class="card border-secondary row-cols-1" >
->>>>>>> 83ec2bfd5812abd6c75cf269bf7100cd9792803d
         <div class="row no-gutters">
             <div class="kitchenImg">
                 <img src=${kitchen.img_src} class="card-img-top card-img-wide" alt="..." >
@@ -50,7 +39,6 @@ function renderCard(kitchen) {
                </div>
           </div>
         </div>
-<<<<<<< HEAD
       </div>`;
   const foodContainer = kitchenDiv.querySelector(".foods");
   const displayContainer = kitchenDiv.querySelector(".foodContainer");
@@ -61,29 +49,12 @@ function renderCard(kitchen) {
   renderOrder(collapsedDiv);
   displayContainer.append(collapsedDiv);
   kitchenContainer.append(kitchenDiv);
-=======
-      </div>`
-    const foodContainer = kitchenDiv.querySelector(".foods");
-    const displayContainer = kitchenDiv.querySelector(".foodContainer");
-    const collapsedDiv = document.createElement('div');
-    collapsedDiv.className = "collapse";
-    collapsedDiv.id = 'collapseList';
-    renderFood(foodContainer, kitchen, displayContainer, collapsedDiv);
-    renderOrder(collapsedDiv);
-    displayContainer.append(collapsedDiv);
-    kitchenContainer.append(kitchenDiv);
-
->>>>>>> 83ec2bfd5812abd6c75cf269bf7100cd9792803d
 }
 
 let totalPrice = 0;
 
 function renderOrder(collapsedDiv) {
-<<<<<<< HEAD
   collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
-=======
-    collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
->>>>>>> 83ec2bfd5812abd6c75cf269bf7100cd9792803d
                             <div class="addedFoods card-body">
                                 <h5 class="card-title">Cart</h5>
                                 <ul class="foodList">
@@ -92,16 +63,9 @@ function renderOrder(collapsedDiv) {
                                 </div>
                             </div>`;
 }
-<<<<<<< HEAD
 function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
   kitchen.menu.foods.forEach((food) => {
     foodContainer.innerHTML += `<div class="col-3 p-1">
-=======
-
-function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
-    kitchen.menu.foods.forEach((food) => {
-        foodContainer.innerHTML += `<div class="col-3 p-1">
->>>>>>> 83ec2bfd5812abd6c75cf269bf7100cd9792803d
                                     <div class="card h-100">
                                         <img src=${food.img_src} class="card-img-top" alt="...">
                                         <hr class="m-0">
@@ -114,7 +78,6 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
                                             </button>
                                         </div>
                                     </div>
-<<<<<<< HEAD
                                 </div>`;
   });
   foodContainer.addEventListener("click", (event) => {
@@ -180,29 +143,7 @@ form.addEventListener('submit', (event) => {
     submitOrder(userObj, subtotal,kitchenId)
   })
 }
-=======
-                                </div>`
-    })
-    foodContainer.addEventListener('click', (event) => {
-        const foodUl = displayContainer.querySelector('.foodList');
-        if (event.target.tagName === 'BUTTON') {
 
-            $(collapsedDiv).collapse({
-                show: true
-            })
-            const id = parseInt(event.target.closest('.card-body').dataset.id);
-            const foodName = event.target.parentElement.firstElementChild.innerText;
-            const foodPrice = parseFloat(event.target.parentElement.children[2].innerText.split('$')[1]);
-            const foodLi = document.createElement('li');
-            foodLi.innerText = foodName + ' ' + foodPrice;
-            foodUl.append(foodLi);
-        }
-    })
-}
-
-
-
->>>>>>> 83ec2bfd5812abd6c75cf269bf7100cd9792803d
 
 function submitOrder(userObj,subtotal,kitchenId) {
 const payLoad = {
@@ -239,42 +180,3 @@ function createOrder(resp,subtotal,kitchenId) {
      .then(resp => resp.json()).then(console.log)
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// selectOptions.addEventListener("change", (e) => {
-//   const name = e.target.value;
-//   const id = parseInt(find_id(name).dataset.id);
-//   let foodDiv = manageVisibility(id);
-//   foodDiv.style.display = "block";
-// });
-
-// function manageVisibility(id) {
-//   const menu = [...document.querySelectorAll(".menu")];
-//   let instance = menu.find((food) => {
-//     return parseInt(food.dataset.id) === id;
-//   });
-//   return instance;
-// }
-
-// function find_id(name) {
-//   const kitchenOptions = [...document.querySelectorAll("option")];
-//   return kitchenOptions.find((o) => o.value === name);
-// }
-
-// function filter_available(kitchen) {
-//   availableMenu = kitchen.menu.foods.map((food) => {
-//     return food.availability === true;
-//   });
-//   return availableMenu;
-// }
