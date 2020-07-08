@@ -13,14 +13,15 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/77bbde81ff.js" crossorigin="anonymous"></script>
+    <script src="./filterFoodType.js" defer></script>
+    <script src="./filterZipcode.js" defer></script>
     <script src="./index.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
     <!-- Search bar for ZIP CODE -->
-    <div class="searchBar container mb-4">
-        <form class="navbar-form" role="search">
+    <div class="container mb-4">
             <div class="form-row">
                 <div class=col-md-4 mb-3">
                     <select class="custom-select " name="kitchens" id="kitchens" >
@@ -31,27 +32,24 @@
                     </select>
                 </div>
                 <div class=col-md-8 mb-3">
-                    <div class="input-group ">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <div class="input-group-append">
-                            <span class="input-group-text red lighten-3" id="basic-text1">
-                            <i class="fas fa-search"></i>
-                            </span>
+                    <form id="searchForm">
+                        <div class="input-group ">
+                            <input name="zipcode" type="text" class="form-control" placeholder="Search by Zipcode">
+                            <div class="input-group-append">
+                                <button class="btn input-group-text  lighten-3" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </form>
-
-        
-        
-
     </div>
     <!-- Search bar for ZIP CODE ENDS -->
 
     <!-- FoodType filter -->
 
-    <div class="foodType container ">
+    <div class="foodType container">
         <h5 class="card-title">Choose Kitchen by Food Type</h5>
         <div class="my-4 row d-flex  justify-content-center">
             
@@ -71,219 +69,6 @@
     <!-- Kitchens -->
 
     <div class="kitchens container">
-
-
-        <div class="kitchen row mb-5">
-            <div class="card border-secondary row-cols-1" >
-                <div class="row no-gutters">
-                    <div class="kitchenImg">
-                        <img src="https://lorempixel.com/600/400/food/1" class="card-img-top card-img-wide" alt="..." >
-                    </div>
-                    <div class="col-md-12">
-                        <div class="kitchenInfo card-body">
-                            <h5 class="card-title">Kitchen username</h5>
-                            <p class="card-text">Kitchen descriptions</p>
-                        </div>
-                    <hr class="my-2">
-
-                        <div class="foodContainer card-body">
-                            
-                            <div class="row">
-
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/2" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-                        
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/3" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/4" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/5" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                            <!-- Filled-in checkbox -->
-                                            <!-- <div class="form-check float-right">
-                                                <input type="checkbox" class="form-check-input filled-in" data-id="foodId">
-                                            </div> -->
-                                        </div>
-                
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-                        
-                            </div>
-                            <!-- Grid row -->
-                        </div>
-                    
-                        <div id="collapseList" class="collapse">
-                            <hr class="mt-4 mb-2">
-                            <div class="addedFoods card-body">
-                                <h5 class="card-title">Added Foods</h5>
-                                <ul>
-                                    <li>added food 1</li>
-                                    <li>added food 1</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="kitchen row mb-5">
-            <div class="card border-secondary row-cols-1" >
-                <div class="row no-gutters">
-                    <div class="kitchenImg">
-                        <img src="https://lorempixel.com/600/400/food/6" class="card-img-top card-img-wide" alt="..." >
-                    </div>
-                    <div class="col-md-12">
-                        <div class="kitchenInfo card-body">
-                            <h5 class="card-title">Kitchen username</h5>
-                            <p class="card-text">Kitchen descriptions</p>
-                        </div>
-                    <hr class="my-2">
-
-                        <div class="foodContainer card-body">
-                            
-                            <div class="row">
-
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/7" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-                        
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/8" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/9" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-3 p-1">
-                                    <div class="card ">
-                                        <img src="https://lorempixel.com/200/200/food/10" class="card-img-top" alt="...">
-                                        <hr class="m-0">
-                                        <div class="card-body">
-                                            <h6 class="foodName font-weight-bold mb-1">Food Name</h6>
-                                            <p class="foodDesc mb-0">Food Description</p>
-                                            <button type="button" class="addFood btn btn-default float-right" data-toggle="collapse" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
-                                            </button>
-                                            <!-- Filled-in checkbox -->
-                                            <!-- <div class="form-check float-right">
-                                                <input type="checkbox" class="form-check-input filled-in" data-id="foodId">
-                                            </div> -->
-                                        </div>
-                
-                                    </div>
-                                </div>
-                                <!-- Grid column -->
-                        
-                            </div>
-                            <!-- Grid row -->
-                        </div>
-                    
-                        <div id="collapseList" class="collapse">
-                            <hr class="mt-4 mb-2">
-                            <div class="addedFoods card-body">
-                                <h5 class="card-title">Added Foods</h5>
-                                <ul>
-                                    <li>added food 1</li>
-                                    <li>added food 1</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-
 
     </div>
     
