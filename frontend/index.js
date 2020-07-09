@@ -52,9 +52,9 @@ function renderCard(kitchen) {
 }
 
 let totalPrice = 0;
-let totalTax = 0;
+// let totalTax = 0;
 let foodOrderIds = [];
-let lastOrder = 46;
+let lastOrder = null;
 
 function renderOrder(collapsedDiv) {
   collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
@@ -90,9 +90,8 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
     const totalDiv = document.createElement("div");
 
     if (event.target.tagName === "BUTTON") {
-      $(collapsedDiv).collapse({
-        show: true,
-      });
+      $(collapsedDiv).collapse("show");
+      
       const kitchenId = parseInt(event.target.closest('.kitchen').dataset.id);
       const foodId = parseInt(event.target.closest(".card-body").dataset.id);
       const foodName = event.target.parentElement.firstElementChild.innerText;
@@ -165,7 +164,9 @@ priceDiv.innerHTML += `<div class="testForm container row justify-content-center
       email: event.target.email.value,
       phone: event.target.phone.value
     }
-
+      $(event.target.closest('#collapseList')).collapse("hide");
+      form.reset()
+      event.target.closest(".addedFoods").querySelector(".foodList").innerHTML = "";
     submitOrder(userObj, totalPrice, kitchenId)
   })
   const editBtn = document.querySelector('.editBtn');
@@ -271,7 +272,7 @@ editBtn.addEventListener('click', (e) => {
     .then(resp => resp.json())
     // .then(lastOrderObj => console.log(lastOrderObj))
     .then(lastOrderObj => {
-      console.log(lastOrderObj.user.name, lastOrderObj.user.email, lastOrderObj.total_price)
+      
       // setTimeout(2000)
       form[0].value = lastOrderObj.user.phone
       form[1].value = lastOrderObj.user.location
@@ -319,16 +320,72 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     let count = uniqeFoodCount[key]
     let foodObj = orderedFoods.find(food => food.name === foodName)
     let foodLi = document.createElement('li')
-    foodLi.innerText =`name: ${foodObj.name} | price: ${foodObj.price} `
-    let countInput = document.createElement('input')
+    foodLi.innerHTML =`name: ${foodObj.name} | price: <span class="priceSpan">${foodObj.price}</span>`
+    let countInput = document.createElement('input');
+    countInput.name = "count";
     countInput.value = count
+
     foodLi.append(countInput)
     foodOrderList.append(foodLi)
+
     // console.log(foodName, count)
     }
+    const submitForm = document.querySelector('#modalEdit');
+  submitForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    // debugger
+    
+    let arr = [...e.target.querySelectorAll("#foodOrderList li")];
+    let total = arr.map(e => {
+      var price= parseFloat(e.querySelector("span").innerText);
+      var count = parseFloat(e.querySelector("input").value);
+      var total = price * count; 
+        return total 
+      
+    }).reduce((v,a)=> a +v)
+
+
+    const editObj = {
+      total_price: total
+    }
+    editFetch(editObj,lastOrderObj)
+  })
+  const deleteBtn = document.querySelector("#delete");
+  deleteBtn.addEventListener("click", (e) => {
+    // e.preventDefault()
+    const deleteObj = {
+    method: 'DELETE',
+    // mode: 'cors', // no-cors, *cors, same-origin
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  fetch(`http://localhost:3000/orders/${lastOrderObj.id}`, deleteObj)
+  .then(r => r.json()).then(console.log)
+  })
+}
+  
+  function editFetch(editObj,lastOrderObj) {
+   debugger
+  const editOrderPayload = {
+    method: 'PATCH',
+    // mode: 'cors', // no-cors, *cors, same-origin
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(editObj)
+  }
+  
+  fetch(`http://localhost:3000/orders/${lastOrderObj.id}`,editOrderPayload)
+    .then(resp => resp.json()).then(console.log)
 }
 
 
+    
+
+    
+  
+  
 /*****editOrder needs to be made */
 // function editOrder(editBtn) {
 //   let form = document.querySelector('#editForm').querySelectorAll('input');

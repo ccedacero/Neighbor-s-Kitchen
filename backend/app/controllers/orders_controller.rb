@@ -22,16 +22,21 @@ end
 
 # PATCH/PUT /kitchen/1
 def update
-    if order.update(order_params)
-    order json: order
-    else
-    order json: order.errors, status: :unprocessable_entity
-    end
+    order = set_order()
+    Order.update(order_params);
+    render json: order
+    # if order.update(order_params)
+    # order json: order
+    # else
+    # order json: order.errors, status: :unprocessable_entity
+    # end
 end
 
 # DELETE /kitchen/1
 def  destroy
-    order.destroy
+    order = set_order()
+    order.destroy()
+    render json: order
 end
 
 private
