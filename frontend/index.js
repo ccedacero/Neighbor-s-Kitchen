@@ -284,7 +284,6 @@ editBtn.addEventListener('click', (e) => {
     .then(lastOrderObj => {
       console.log(lastOrderObj.user.name, lastOrderObj.user.email, lastOrderObj.total_price)
       // setTimeout(2000)
-      debugger
       form[0].value = lastOrderObj.user.phone
       form[1].value = lastOrderObj.user.location
       username.textContent = lastOrderObj.user.name
@@ -310,7 +309,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
   
   const foodOrderList = document.querySelector('#foodOrderList ul')
   let orderedFoods = lastOrderObj.foods
-
+  foodOrderList.innerHTML = ''
   //for each food 
   //print name and price and count(as input field)
   // orderedFoods.forEach(food => {

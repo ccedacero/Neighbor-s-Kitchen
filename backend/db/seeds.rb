@@ -132,7 +132,7 @@ def seed_kitchens(kitchen_addr)
       username = Faker::Restaurant.name;
       description = Faker::Restaurant.description;
       phone = Faker::PhoneNumber.cell_phone
-      img_src = "http://lorempixel.com/640/480/food";
+      img_src = "http://lorempixel.com/640/480/food/#{i}";
       location = addressList[i]
       food_type = food_types[rand(0..food_types.length)];
       
@@ -168,7 +168,7 @@ def seed_foods
       name = Faker::Food.dish;
       description = Faker::Food.description;
       price = Random.rand(2..20);
-      img_src = "http://lorempixel.com/640/480/food";
+      img_src = "http://lorempixel.com/640/480/food/#{rand(1..10)}";
       availability = [true, false].sample;
       Food.create(
         name: name, 
