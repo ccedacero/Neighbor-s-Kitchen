@@ -13,26 +13,37 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/77bbde81ff.js" crossorigin="anonymous"></script>
-    <script src="./filterFoodType.js" defer></script>
-    <script src="./filterZipcode.js" defer></script>
+    <script src="./filterKitchen.js" defer></script>
     <script src="./index.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
-    <!-- Search bar for ZIP CODE -->
+    <!-- Search bar for  FOODTYPE  / ZIP CODE -->
     <div class="container mb-4">
-            <div class="form-row">
-                <div class=col-md-4 mb-3">
-                    <select class="custom-select " name="kitchens" id="kitchens" >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+        <div id="searchFilter">
+            <form id="searchForm" class="form-row">
+                <div id="foodTypeForm" class="btn-group btn-group-toggle col-md-8 mb-5" >
+                    <label class="btn btn-secondary ">
+                        <input type="radio" name="options" id="Asian" autocomplete="off" > Asian
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="Middle Eastern" autocomplete="off"> Middle Eastern
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="Indian" autocomplete="off"> Indian
+                    </label>
+                    <label class="btn btn-secondary ">
+                        <input type="radio" name="options" id="Italian" autocomplete="off" > Italian
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="Amerian" autocomplete="off"> Amerian
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="Caribbean" autocomplete="off"> Caribbean
+                    </label>
                 </div>
-                <div class=col-md-8 mb-3">
-                    <form id="searchForm">
+                <div class="col-md-4 mb-5">
                         <div class="input-group ">
                             <input name="zipcode" type="text" class="form-control" placeholder="Search by Zipcode">
                             <div class="input-group-append">
@@ -41,30 +52,12 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
                 </div>
-            </div>
-    </div>
-    <!-- Search bar for ZIP CODE ENDS -->
-
-    <!-- FoodType filter -->
-
-    <div class="foodType container">
-        <h5 class="card-title">Choose Kitchen by Food Type</h5>
-        <div class="my-4 row d-flex  justify-content-center">
-            
-
-            <button  type="button" class="btn btn-primary mx-3">Asian</button>
-            <button  type="button" class="btn btn-primary mx-3">Middle Eastern</button>
-            <button  type="button" class="btn btn-primary mx-3">Indian</button>
-            <button  type="button" class="btn btn-primary mx-3">Italian</button>
-            <button  type="button" class="btn btn-primary mx-3">Amerian</button>
-            <button  type="button" class="btn btn-primary mx-3">Caribbean</button>
+            </form>
         </div>
-
     </div>
-    
-    <!-- FoodType filter ends-->
+    <!-- Search bar for  FOODTYPE  / ZIP CODE ENDS -->
+
 
     <!-- Kitchens -->
 

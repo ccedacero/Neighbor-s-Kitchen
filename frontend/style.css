@@ -23,10 +23,10 @@
   color: green;
 }
 
-<<<<<<< HEAD
 .totalPrice {
   display: inline-grid;
-=======
+}
+
 h5.card-title {
   display: inline-block;
 }
@@ -41,5 +41,8 @@ h5.card-title {
   height: 500px;
   width: 500px;
   margin: auto;
->>>>>>> 83ec2bfd5812abd6c75cf269bf7100cd9792803d
+}
+
+#searchForm{
+  width: 100%;
 }

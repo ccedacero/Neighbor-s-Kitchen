@@ -19,6 +19,7 @@ fetch("http://localhost:3000/kitchens/")
 function renderCard(kitchen) {
   const kitchenContainer = document.querySelector(".kitchens");
   const kitchenDiv = document.createElement("div");
+  
   kitchenDiv.className = "kitchen row mb-5";
   // debugger
   kitchenDiv.dataset.id = kitchen.id;
@@ -74,14 +75,14 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
                                             <p class="foodDesc mb-0">${food.description}</p>
                                             <h6 class="foodPrice font-weight-bold mb-1">Price: $${food.price}</h6>
                                             <button type="button" class="addFood btn btn-default float-right" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-utensils "></i>
+                                                <i class="fas fa-plus-circle "></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>`;
   });
   foodContainer.addEventListener("click", (event) => {
-    const foodUl = displayContainer.querySelector(".foodList");
+    const foodUl = displayContainer.querySelector(".foodList");renderCard
     const totalDiv = document.createElement("div");
 
     if (event.target.tagName === "BUTTON") {
