@@ -53,7 +53,9 @@ function renderCard(kitchen) {
 }
 
 let totalPrice = 0;
-
+let totalTax = 0;
+let foodOrderIds = [];
+let lastOrder = null;
 function renderOrder(collapsedDiv) {
   collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
                             <div class="addedFoods card-body">
@@ -84,7 +86,7 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
   foodContainer.addEventListener("click", (event) => {
     const foodUl = displayContainer.querySelector(".foodList");renderCard
     const totalDiv = document.createElement("div");
-
+    
     if (event.target.tagName === "BUTTON") {
       $(collapsedDiv).collapse({
         show: true,
@@ -92,34 +94,51 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
       const kitchenId = parseInt(event.target.closest('.kitchen').dataset.id);
       const foodId = parseInt(event.target.closest(".card-body").dataset.id);
       const foodName = event.target.parentElement.firstElementChild.innerText;
-      const foodPrice = parseFloat(
-        event.target.parentElement.children[2].innerText.split("$")[1]
-      );
+      const foodPrice = parseFloat(event.target.parentElement.children[2].innerText.split("$")[1]);
+      const foodSpan = document.createElement('span');
+      foodSpan.innerHTML = `<i class="fas fa-trash" style="color:#d9534f"></i>`;
+      foodOrderIds.push(foodId)
+      // debugger
+      // Price Section
       totalPrice += foodPrice;
+      //price for one quant of this item 
+      let itemTax = parseFloat((foodPrice / 100) * 8.875).toFixed(2);
+      let currentItemTax = 0; 
+      // let subtotal = totalTax + totalPrice; 
       let matches = document.querySelector(`li[data-id="${foodId}"]`);
+      const foodLi = document.createElement("li");
       if (matches) {
-          let foodCounter = parseInt(matches.dataset.counter) + 1;
-          matches.dataset.counter = foodCounter;
+       currentItemTax = parseInt(matches.dataset.counter) * itemTax;
+       let foodCounter = parseInt(matches.dataset.counter) + 1;
+       matches.dataset.counter = foodCounter;
        matches.innerText = `${foodName} $${foodPrice} (${foodCounter})`;
+       matches.append(foodSpan)
+       itemTax = parseFloat((foodCounter * itemTax) - currentItemTax);
+       totalTax = itemTax
+       debugger
+       removeLi(matches,foodSpan,foodPrice,itemTax)
       } else {
       const foodLi = document.createElement("li");
       foodLi.dataset.counter = 1;
       foodLi.innerText = foodName + " " + "$" + foodPrice +"(1)";
       foodLi.dataset.id = foodId;
+      foodLi.append(foodSpan);
       foodUl.append(foodLi);
+      // debugger
+      itemTax = parseFloat(parseFloat(foodLi.dataset.counter * itemTax));
+      totalTax += itemTax
+       removeLi(foodLi,foodSpan,foodPrice,itemTax)
       }
-      // Price Section
-      let taxes = parseFloat((totalPrice / 100) * 8.875).toFixed(2);
-      let subtotal = parseFloat(taxes) + totalPrice; 
-      orderSection(event,taxes,subtotal,kitchenId)
-    
+      // debugger
+      orderSection(event,kitchenId)
+      
     }
   });
 };
 
-function orderSection(event,taxes,subtotal,kitchenId) {
+function orderSection(event,kitchenId) {
 const priceDiv =event.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild;
-priceDiv.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${taxes}<br><hr><strong>Subtotal:$${subtotal}</strong></h6>`;
+priceDiv.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${totalTax}<br><hr><strong>Subtotal:$${totalPrice}</strong></h6>`;
 priceDiv.innerHTML += `<div class="testForm container row justify-content-center">
             <div class="form-group form-group-sm">
         <form class="order-form "method="post">
@@ -133,16 +152,18 @@ priceDiv.innerHTML += `<div class="testForm container row justify-content-center
                 <label for="location" id="location-label">Location:</label>
                 <input type="text" id="location" name="location" placeholder="Address"><br>
                 <label for="subtotal" id="subtotal-label">Subtotal:</label>
-                <input type="text" id="subtotal" name="subtotal" value=$${subtotal} disabled><br>
+                <input type="text" id="subtotal" name="subtotal" value=$${totalPrice} disabled><br>
                 <input type="submit" class="btn btn-success" value ="Place Order" >
             </fieldset>
         </form>
+         <button type="button" class="btn btn-primary editBtn" data-toggle="modal" data-target="#editForm">
+  Edit Order
+</button>
         </div>
         </div>`
 const form = priceDiv.querySelector(".order-form");
 form.addEventListener('submit', (event) => {
     event.preventDefault()
-    // debugger
     const userObj = {
         name: event.target.name.value,
         location: event.target.location.value,
@@ -150,12 +171,14 @@ form.addEventListener('submit', (event) => {
         phone: event.target.phone.value
     }
 
-    submitOrder(userObj, subtotal,kitchenId)
+    submitOrder(userObj, totalPrice,kitchenId)
   })
+  const editBtn = document.querySelector('.editBtn');
+  editOrder(editBtn)
 }
 
 
-function submitOrder(userObj,subtotal,kitchenId) {
+function submitOrder(userObj,totalPrice,kitchenId) {
 const payLoad = {
     method: 'POST',
     // mode: 'cors', // no-cors, *cors, same-origin
@@ -166,18 +189,17 @@ const payLoad = {
 }
 fetch('http://localhost:3000/users', payLoad)
 .then(resp => resp.json())
-.then(resp => createOrder(resp,subtotal,kitchenId))
+.then(userResp => createOrder(userResp,totalPrice,kitchenId))
 }
-
-function createOrder(resp,subtotal,kitchenId) {
+function createOrder(userResp,totalPrice,kitchenId) {
     const date = new Date();
     const orderObj = {
         date: date,
-        total_price: subtotal,
+        total_price: totalPrice,
         kitchen_id: kitchenId, 
-        user_id: resp.id , 
+        user_id: userResp.id , 
     }
-
+// debugger
     const orderPayload = {
     method: 'POST',
     // mode: 'cors', // no-cors, *cors, same-origin
@@ -187,7 +209,116 @@ function createOrder(resp,subtotal,kitchenId) {
    body: JSON.stringify(orderObj)
 }   
      fetch('http://localhost:3000/orders', orderPayload)
-     .then(resp => resp.json()).then(console.log)
-    
+     .then(resp => resp.json()).then(orderResp => {
+      // console.log(orderResp)
+      createFoodOrder(orderResp)
+      lastOrder = orderResp.id;
+     })
 }
- 
+
+function createFoodOrder(orderResp) {
+  foodOrderIds.forEach(order => {
+  createFoodOrderFetch(orderResp.id,order);
+  })
+}
+
+function createFoodOrderFetch(orderId, foodId) {
+  foodOrderObj = {
+    order_id: orderId,
+    food_id: foodId
+  }
+  const foodOrderPayload = {
+    method: 'POST',
+    // mode: 'cors', // no-cors, *cors, same-origin
+    headers: {
+      'Content-Type': 'application/json'
+    },
+   body: JSON.stringify(foodOrderObj)
+  }
+  fetch('http://localhost:3000/food_orders',foodOrderPayload)
+  .then(resp=> resp.json()).then(console.log)   
+}
+
+function removeLi(foodLi,foodSpan,foodPrice,taxes) {
+  taxes = parseFloat(taxes)
+  let subT = 0; 
+  foodSpan.addEventListener('click', (e) => {
+     const priceSec = e.currentTarget.closest('.addedFoods').querySelector('.totalPrice').firstChild;
+    //  get current food price by multipying times quant
+     totalPrice = parseFloat(totalPrice - (foodLi.dataset.counter * foodPrice));
+    // get current food tax by multiplying times tax  
+     itemTax = parseFloat(foodLi.dataset.counter * taxes);
+    //  debugger
+
+     if (totalTax !== taxes) {
+     totalTax = parseFloat(totalTax -taxes).toFixed(2); 
+     debugger
+     } else {
+       totalTax = 0; 
+     }
+
+    if (totalPrice !== 0) {
+    subT = parseFloat(taxes + totalPrice);
+    } else if(totalPrice === 0) {
+     subT = 0;
+    } 
+    subtotal.value = totalPrice;
+        foodLi.remove();
+    priceSec.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${totalTax}<br><hr><strong>Subtotal:$${subT}</strong></h6>`;
+  })
+}
+
+
+
+function editOrder(editBtn) {
+  let form = document.querySelector('#editForm').querySelectorAll('input');
+    let name = form[0].value;
+    let email = form[1].value;
+    let phone = form[2].value;
+    let location = form[3].value;
+    let subtotal = form[4].value;
+    debugger
+    editBtn.addEventListener('click', (e) => {  
+  fetch(`http://localhost:3000/orders/${lastOrder}`)
+  .then(resp => resp.json())
+  // .then(lastOrderObj => console.log(lastOrderObj))
+  .then(lastOrderObj => {
+    console.log(lastOrderObj.user.name,lastOrderObj.user.email,lastOrderObj.total_price)
+    // name = lastOrderObj.user.name,
+    // emai = lastOrderObj.user.email,
+    // phone = lastOrderObj.user.phone,
+    // location = lastOrderObj.user.location,
+    // subtotal = lastOrderObj.total_price
+    // debugger
+    })
+    })
+}
+    // const date = new Date();
+  
+//     const orderPayload = {
+//     method: 'POST',
+//     // mode: 'cors', // no-cors, *cors, same-origin
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//    body: JSON.stringify(orderObj)
+// }   
+//      fetch('http://localhost:3000/orders', orderPayload)
+//      .then(resp => resp.json()).then(orderResp => {
+//       createFoodOrder(orderResp)
+//      })
+
+
+
+
+
+
+
+
+
+
+
+
+ //edit order, remove from list before adding 
+ //edit delete order 
+ // 
