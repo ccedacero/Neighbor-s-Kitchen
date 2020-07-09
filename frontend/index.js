@@ -10,7 +10,6 @@ const kitchenMenu = document.querySelector(".kitchen-menu");
 fetch("http://localhost:3000/kitchens/")
   .then((resp) => resp.json())
   .then((kitchens) => {
-    console.log(kitchens);
     kitchens.forEach((kitchen) => {
       renderCard(kitchen);
     });
@@ -103,48 +102,46 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
       foodOrderIds.push(foodId)
       // debugger
       // Price Section
-      totalPrice += foodPrice;
-      //price for one quant of this item 
-      let itemTax = parseFloat((foodPrice / 100) * 8.875).toFixed(2);
-      let currentItemTax = 0;
-      // let subtotal = totalTax + totalPrice; 
+<<<<<<< HEAD
+      totalPrice = totalPrice + foodPrice;
+      let taxes = parseFloat((totalPrice / 100) * 8.875).toFixed(2);
+      taxes = parseFloat(taxes);
+      let subtotal = totalPrice + taxes;
+      subtotal = Math.round((subtotal + Number.EPSILON) * 100) / 100;
       let matches = document.querySelector(`li[data-id="${foodId}"]`);
       const foodLi = document.createElement("li");
       if (matches) {
-        currentItemTax = parseInt(matches.dataset.counter) * itemTax;
-        let foodCounter = parseInt(matches.dataset.counter) + 1;
-        matches.dataset.counter = foodCounter;
-        matches.innerText = `${foodName} $${foodPrice} (${foodCounter})`;
-        matches.append(foodSpan)
-        itemTax = parseFloat((foodCounter * itemTax) - currentItemTax);
-        totalTax = itemTax
-        // debugger
-        removeLi(matches, foodSpan, foodPrice, itemTax)
+       let foodCounter = parseInt(matches.dataset.counter) + 1;
+       matches.dataset.counter = foodCounter;
+       matches.innerText = `${foodName} $${foodPrice} (${foodCounter})`;
+       matches.append(foodSpan)
+      //  totalTax = taxes
+      //  debugger
+       removeLi(matches,foodSpan,foodPrice)
       } else {
-        const foodLi = document.createElement("li");
-        foodLi.dataset.counter = 1;
-        foodLi.innerText = foodName + " " + "$" + foodPrice + "(1)";
-        foodLi.dataset.id = foodId;
-        foodLi.append(foodSpan);
-        foodUl.append(foodLi);
-        // debugger
-        itemTax = parseFloat(parseFloat(foodLi.dataset.counter * itemTax));
-        totalTax += itemTax
-        removeLi(foodLi, foodSpan, foodPrice, itemTax)
+      const foodLi = document.createElement("li");
+      foodLi.dataset.counter = 1;
+      foodLi.innerText = foodName + " " + "$" + foodPrice +"(1)";
+      foodLi.dataset.id = foodId;
+      foodLi.append(foodSpan);
+      foodUl.append(foodLi);
+      // debugger
+       removeLi(foodLi,foodSpan,foodPrice)
       }
       // debugger
-      orderSection(event, kitchenId)
-
+      orderSection(event,kitchenId,taxes,subtotal)
     }
   });
 };
 
-function orderSection(event, kitchenId) {
-  const priceDiv = event.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild;
-  priceDiv.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${totalTax}<br><hr><strong>Subtotal:$${totalPrice}</strong></h6>`;
-  priceDiv.innerHTML += `<div class="testForm container row justify-content-center">
+<<<<<<< HEAD
+function orderSection(event,kitchenId,taxes,subtotal) {
+  // debugger
+const priceDiv =event.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild;
+priceDiv.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${taxes}<br><hr><strong>Subtotal:$${subtotal}</strong></h6>`;
+priceDiv.innerHTML += `<div class="testForm container row justify-content-center">
             <div class="form-group form-group-sm">
-        <form class="order-form "method="post">
+        <form class="order-form"method="post">
             <fieldset>
                 <label for="name" id="name-label">Name:</label>
                 <input type="text" name="name" id="name" placeholder="Enter your Name" required><br>
@@ -155,7 +152,7 @@ function orderSection(event, kitchenId) {
                 <label for="location" id="location-label">Location:</label>
                 <input type="text" id="location" name="location" placeholder="Address"><br>
                 <label for="subtotal" id="subtotal-label">Subtotal:</label>
-                <input type="text" id="subtotal" name="subtotal" value=$${totalPrice} disabled><br>
+                <input type="text" id="subtotal" name="subtotal" value=$${subtotal} disabled><br>
                 <input type="submit" class="btn btn-success" value ="Place Order" >
             </fieldset>
         </form>
@@ -173,7 +170,10 @@ function orderSection(event, kitchenId) {
 
     submitOrder(userObj, totalPrice, kitchenId)
   })
-  
+<<<<<<< HEAD
+  const editBtn = document.querySelector('.editBtn');
+  // editOrder(editBtn)
+
 }
 
 
@@ -242,30 +242,24 @@ function createFoodOrderFetch(orderId, foodId) {
 
 function removeLi(foodLi, foodSpan, foodPrice, taxes) {
   taxes = parseFloat(taxes)
-  let subT = 0;
+<<<<<<< HEAD
   foodSpan.addEventListener('click', (e) => {
-    const priceSec = e.currentTarget.closest('.addedFoods').querySelector('.totalPrice').firstChild;
+     const priceSec = e.currentTarget.closest('.addedFoods').querySelector('.totalPrice').firstChild;
+     subtotalField = document.querySelector('.order-form').querySelector('#subtotal');
+
     //  get current food price by multipying times quant
     totalPrice = parseFloat(totalPrice - (foodLi.dataset.counter * foodPrice));
     // get current food tax by multiplying times tax  
-    itemTax = parseFloat(foodLi.dataset.counter * taxes);
-    //  debugger
-
-    if (totalTax !== taxes) {
-      totalTax = parseFloat(totalTax - taxes).toFixed(2);
-      debugger
-    } else {
-      totalTax = 0;
-    }
-
-    if (totalPrice !== 0) {
-      subT = parseFloat(taxes + totalPrice);
-    } else if (totalPrice === 0) {
-      subT = 0;
-    }
-    subtotal.value = totalPrice;
-    foodLi.remove();
-    priceSec.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${totalTax}<br><hr><strong>Subtotal:$${subT}</strong></h6>`;
+<<<<<<< HEAD
+      taxes = parseFloat((totalPrice / 100) * 8.875).toFixed(2)
+      
+      subtotal = parseFloat(totalPrice + parseFloat(taxes))
+      subtotal = Math.round((subtotal + Number.EPSILON) * 100) / 100
+      subtotalField.value = subtotal;
+      
+      foodLi.remove();
+      
+    priceSec.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${taxes}<br><hr><strong>Subtotal:$${subtotal}</strong></h6>`;
   })
 }
 
