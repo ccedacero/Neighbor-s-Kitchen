@@ -102,7 +102,6 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
       foodOrderIds.push(foodId)
       // debugger
       // Price Section
-<<<<<<< HEAD
       totalPrice = totalPrice + foodPrice;
       let taxes = parseFloat((totalPrice / 100) * 8.875).toFixed(2);
       taxes = parseFloat(taxes);
@@ -134,7 +133,6 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
   });
 };
 
-<<<<<<< HEAD
 function orderSection(event,kitchenId,taxes,subtotal) {
   // debugger
 const priceDiv =event.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.lastElementChild.lastElementChild;
@@ -170,7 +168,6 @@ priceDiv.innerHTML += `<div class="testForm container row justify-content-center
 
     submitOrder(userObj, totalPrice, kitchenId)
   })
-<<<<<<< HEAD
   const editBtn = document.querySelector('.editBtn');
   // editOrder(editBtn)
 
@@ -242,7 +239,6 @@ function createFoodOrderFetch(orderId, foodId) {
 
 function removeLi(foodLi, foodSpan, foodPrice, taxes) {
   taxes = parseFloat(taxes)
-<<<<<<< HEAD
   foodSpan.addEventListener('click', (e) => {
      const priceSec = e.currentTarget.closest('.addedFoods').querySelector('.totalPrice').firstChild;
      subtotalField = document.querySelector('.order-form').querySelector('#subtotal');
@@ -250,7 +246,6 @@ function removeLi(foodLi, foodSpan, foodPrice, taxes) {
     //  get current food price by multipying times quant
     totalPrice = parseFloat(totalPrice - (foodLi.dataset.counter * foodPrice));
     // get current food tax by multiplying times tax  
-<<<<<<< HEAD
       taxes = parseFloat((totalPrice / 100) * 8.875).toFixed(2)
       
       subtotal = parseFloat(totalPrice + parseFloat(taxes))
