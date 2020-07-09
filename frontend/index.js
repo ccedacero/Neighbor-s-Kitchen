@@ -209,20 +209,26 @@ function createFoodOrder(orderResp) {
 
 function removeLi(foodLi,foodSpan,foodPrice,taxes) {
   taxes = parseFloat(taxes)
-  // debugger
+  let subT = 0; 
   foodSpan.addEventListener('click', (e) => {
-    let priceSec = e.currentTarget.closest('.addedFoods').querySelector('.totalPrice').firstChild;
-    foodLi.remove();
-    totalPrice = parseFloat(totalPrice - foodPrice);
-    totalTax = parseFloat(totalTax - taxes); 
+        // debugger
+    const priceSec = e.currentTarget.closest('.addedFoods').querySelector('.totalPrice').firstChild;
+     totalPrice = parseFloat(totalPrice - (foodLi.dataset.counter * foodPrice));
+     itemTax = parseFloat(foodLi.dataset.counter * taxes);
+     if (totalTax > itemTax) {
+     totalTax = parseFloat(totalTax -itemTax).toFixed(2); 
+     debugger
+     } else {
+       totalTax = 0; 
+     }
     if (totalPrice !== 0) {
-    let subtotal = parseFloat(taxes) + totalPrice;
-    } else {
-      let subtotal = 0;
-    }
-
-    debugger
-    priceSec.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${totalTax}<br><hr><strong>Subtotal:$${subtotal}</strong></h6>`;
+    subT = parseFloat(taxes + totalPrice);
+    } else if(totalPrice === 0) {
+     subT = 0;
+    } 
+    subtotal.value = totalPrice;
+        foodLi.remove();
+    priceSec.innerHTML = `<h6>Order Total: $${totalPrice} <br> Taxes: $${totalTax}<br><hr><strong>Subtotal:$${subT}</strong></h6>`;
   })
 }
  
