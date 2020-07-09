@@ -134,7 +134,7 @@ def seed_kitchens(kitchen_addr)
       phone = Faker::PhoneNumber.cell_phone
       img_src = "http://lorempixel.com/640/480/food/#{i}";
       location = addressList[i]
-      food_type = food_types[rand(0..food_types.length)];
+      food_type = food_types[rand(0...food_types.length)];
       
       Kitchen.create(
         username: username, 
