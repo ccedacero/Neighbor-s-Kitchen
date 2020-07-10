@@ -79,7 +79,7 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
                                             <p class="foodDesc mb-0">${food.description}</p>
                                             <h6 class="foodPrice font-weight-bold mb-1">Price: $${food.price}</h6>
                                             <button type="button" class="addFood btn btn-default mt-auto" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
-                                                <i class="fas fa-plus-circle "></i>
+                                                <i class="fas fa-plus-circle  fa-1x" style="color: #fff;"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -338,7 +338,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     const submitForm = document.querySelector('#modalEdit');
   submitForm.addEventListener('submit', (event) => {
     event.preventDefault()
-    debugger
+  
     
     let arr = [...event.target.querySelectorAll("#foodOrderList li")];
     let total = arr.map(e => {

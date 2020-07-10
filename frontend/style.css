@@ -26,11 +26,12 @@ font-family: 'Cormorant', serif;
   margin-left: 6em;
   height:3.1em;
   radius: .5em;
+  background: #430098;
 }
 
 .addFood:hover{
   transition: all 0.4s ease 0s;
-  background-color: greenyellow;
+  background-color: #d39785;
 }
 .fa-utensils:hover {
   color: green;
@@ -79,3 +80,5 @@ btn btn-secondary:hover {
   transition: 1sec;
   color: #000;
 }
+
+
