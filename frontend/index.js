@@ -112,7 +112,7 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
       if (matches) {
        let foodCounter = parseInt(matches.dataset.counter) + 1;
        matches.dataset.counter = foodCounter;
-       matches.innerText = `name: ${foodName} | price: $${foodPrice} (${foodCounter})`;
+       matches.innerText = `name: ${foodName} | price: $${foodPrice} (x${foodCounter})`;
        matches.append(foodSpan)
       //  totalTax = taxes
       //  debugger

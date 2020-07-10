@@ -18,6 +18,9 @@ font-family: 'Cormorant', serif;
   object-fit: cover;
 }
 
+.card{
+  border-radius: 1em;
+}
 .addFood{
   background-color: lightgray;
   padding: 1em;
@@ -35,6 +38,20 @@ font-family: 'Cormorant', serif;
 }
 .fa-utensils:hover {
   color: green;
+}
+.btn-secondary:hover{
+  border-color: #FF6633 !important;
+ background-color: #FF6633 !important;
+}
+
+.btn-secondary{
+  border-color: #723509 !important;
+  background-color: #8B4513 !important;
+ }
+
+.btn-secondary.active{
+border-color: #FF6633 !important;
+background-color: #FF6633 !important;
 }
 
 .totalPrice {
@@ -55,6 +72,7 @@ h5.card-title {
   height: 500px;
   width: 500px;
   margin: auto;
+  margin-bottom: 5em;
 }
 
 #searchForm{
