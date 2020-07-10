@@ -385,7 +385,12 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     .then(resp => resp.json()).then(console.log)
 }
 
-
+// const submitBtn = document.querySelector('#submitBtn');
+//  $("#submitBtn").addEventListener('submit',(e) {
+//     e.preventDefault();
+//     $("#editForm").className = "hide"
+//      // $('#IDModal').modal('hide');
+// })
 
 
 function getLocation() {
@@ -398,7 +403,7 @@ function getLocation() {
 
 function showPosition(position) {
   console.log(position.coords.latitude, position.coords.longitude);
-  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCbRziLV8j59Uv2bA1akJ4idLqVRC2R5lc`)
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=#`)
   .then(resp=> resp.json()).then(locationObj => {
     console.log(parseInt(locationObj.results[0].address_components[7].long_name))
   })
