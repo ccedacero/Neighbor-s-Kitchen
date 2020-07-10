@@ -264,9 +264,6 @@ function removeLi(foodLi, foodSpan, foodPrice, taxes) {
   })
 }
 
-// editOrder********/
-// const editBtn = document.querySelector('.editBtn');
-//   editOrder(editBtn)
 const editBtn = document.querySelector('.editBtn');
 editBtn.addEventListener('click', (e) => {
   
@@ -275,7 +272,6 @@ editBtn.addEventListener('click', (e) => {
   const subtotal = document.querySelector('h6#subtotal')
   fetch(`http://localhost:3000/orders/${lastOrder}`)
     .then(resp => resp.json())
-    // .then(lastOrderObj => console.log(lastOrderObj))
     .then(lastOrderObj => {
       
       // setTimeout(2000)
@@ -290,12 +286,6 @@ editBtn.addEventListener('click', (e) => {
 
       //render ordered food list
       renderFoodOrders(lastOrderObj, uniqeFoodCount)
-      // name = lastOrderObj.user.name,
-      // emai = lastOrderObj.user.email,
-      // phone = lastOrderObj.user.phone,
-      // location = lastOrderObj.user.location,
-      // subtotal = lastOrderObj.total_price
-      // debugger
     })
 })
 
@@ -305,21 +295,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
   const foodOrderList = document.querySelector('#foodOrderList ul')
   let orderedFoods = lastOrderObj.foods
   foodOrderList.innerHTML = ''
-  //for each food 
-  //print name and price and count(as input field)
-  // orderedFoods.forEach(food => {
 
-
-
-  //   let foodLi = document.createElement('li')
-  //   foodLi.innerText =`name: ${food.name} | price: ${food.price} `
-  //   let countInput = document.createElement('input')
-
-    
-  //   countInput.value = ??????
-  //   foodOrderList.append(foodLi)
-  // })
-  // 
   for(let key in uniqeFoodCount){
     let foodName = key
     let count = uniqeFoodCount[key]
@@ -333,7 +309,6 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     foodLi.append(countInput)
     foodOrderList.append(foodLi)
 
-    // console.log(foodName, count)
     }
   const submitForm = document.querySelector('#modalEdit');
   submitForm.addEventListener('submit', (event) => {
