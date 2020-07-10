@@ -73,11 +73,11 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
                                     <div class="card h-100">
                                         <img src=${food.img_src} class="card-img-top" alt="...">
                                         <hr class="m-0">
-                                        <div class="card-body" data-id = "${food.id}">
+                                        <div class="card-body d-flex flex-column" data-id = "${food.id}">
                                             <h6 class="foodName font-weight-bold mb-1">${food.name}</h6>
                                             <p class="foodDesc mb-0">${food.description}</p>
                                             <h6 class="foodPrice font-weight-bold mb-1">Price: $${food.price}</h6>
-                                            <button type="button" class="addFood btn btn-default float-right" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
+                                            <button type="button" class="addFood btn btn-default mt-auto" data-target="#collapseList" aria-expanded="false" aria-controls="collapseList">
                                                 <i class="fas fa-plus-circle "></i>
                                             </button>
                                         </div>
@@ -111,7 +111,7 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
       if (matches) {
        let foodCounter = parseInt(matches.dataset.counter) + 1;
        matches.dataset.counter = foodCounter;
-       matches.innerText = `${foodName} $${foodPrice} (${foodCounter})`;
+       matches.innerText = `name: ${foodName} | price: $${foodPrice} (${foodCounter})`;
        matches.append(foodSpan)
       //  totalTax = taxes
       //  debugger
@@ -119,7 +119,10 @@ function renderFood(foodContainer, kitchen, displayContainer, collapsedDiv) {
       } else {
       const foodLi = document.createElement("li");
       foodLi.dataset.counter = 1;
-      foodLi.innerText = foodName + " " + "$" + foodPrice +"(1)";
+      // foodLi.innerText = foodName + " " + "$" + foodPrice +"(1)";
+      foodLi.innerText =`name: ${foodName} | price: $${foodPrice}(1)`;
+      // name: Bruschette with Tomato | price: 19.0
+
       foodLi.dataset.id = foodId;
       foodLi.append(foodSpan);
       foodUl.append(foodLi);
@@ -166,6 +169,7 @@ priceDiv.innerHTML += `<div class="testForm container row justify-content-center
     }
       $(event.target.closest('#collapseList')).collapse("hide");
       form.reset()
+      
       event.target.closest(".addedFoods").querySelector(".foodList").innerHTML = "";
     submitOrder(userObj, totalPrice, kitchenId)
   })
@@ -276,8 +280,8 @@ editBtn.addEventListener('click', (e) => {
       // setTimeout(2000)
       form[0].value = lastOrderObj.user.phone
       form[1].value = lastOrderObj.user.location
-      username.textContent = lastOrderObj.user.name
-      subtotal.textContent = lastOrderObj.total_price
+      username.textContent = `User: ${lastOrderObj.user.name}`;
+      subtotal.textContent = `Order Total $${lastOrderObj.total_price}`;
 
       //find unique food and count that
       let uniqeFoodCount = {}
@@ -320,7 +324,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     let count = uniqeFoodCount[key]
     let foodObj = orderedFoods.find(food => food.name === foodName)
     let foodLi = document.createElement('li')
-    foodLi.innerHTML =`name: ${foodObj.name} | price: <span class="priceSpan">${foodObj.price}</span>`
+    foodLi.innerHTML =`Order item: ${foodObj.name} | price: <span class="priceSpan">$${foodObj.price}</span><br>Quantity: `
     let countInput = document.createElement('input');
     countInput.name = "count";
     countInput.value = count

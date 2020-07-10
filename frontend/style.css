@@ -46,3 +46,20 @@ h5.card-title {
 #searchForm{
   width: 100%;
 }
+
+.card-body {
+  margin-bottom:50px;
+  /* text-align: center; */
+}
+.addFood {
+  padding: 1em;
+  position: absolute;
+  bottom: 1em;
+  margin-left: 6em;
+  height:3.1em;
+  radius: .5em;
+}
+
+li {
+  
+}
