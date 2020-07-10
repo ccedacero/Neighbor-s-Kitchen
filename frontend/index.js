@@ -325,7 +325,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     let count = uniqeFoodCount[key]
     let foodObj = orderedFoods.find(food => food.name === foodName)
     let foodLi = document.createElement('li')
-    foodLi.innerHTML =`Order item: ${foodObj.name} | price: <span class="priceSpan">$${foodObj.price}</span><br>Quantity: `
+    foodLi.innerHTML =`Order item: ${foodObj.name} | price: $<span class="priceSpan">${foodObj.price}</span><br>Quantity: `
     let countInput = document.createElement('input');
     countInput.name = "count";
     countInput.value = count
@@ -336,17 +336,17 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     // console.log(foodName, count)
     }
     const submitForm = document.querySelector('#modalEdit');
-  submitForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    // debugger
+  submitForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    debugger
     
-    let arr = [...e.target.querySelectorAll("#foodOrderList li")];
+    let arr = [...event.target.querySelectorAll("#foodOrderList li")];
     let total = arr.map(e => {
-      var price= parseFloat(e.querySelector("span").innerText);
+      var price = parseFloat(e.querySelector("span").innerText);
       var count = parseFloat(e.querySelector("input").value);
       var total = price * count; 
         return total 
-      
+        
     }).reduce((v,a)=> a +v)
 
 
@@ -371,7 +371,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
 }
   
   function editFetch(editObj,lastOrderObj) {
-   debugger
+  //  debugger
   const editOrderPayload = {
     method: 'PATCH',
     // mode: 'cors', // no-cors, *cors, same-origin
