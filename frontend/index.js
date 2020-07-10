@@ -58,8 +58,9 @@ let lastOrder = null;
 
 function renderOrder(collapsedDiv) {
   collapsedDiv.innerHTML = `<hr class="mt-4 mb-2">
-                            <div class="addedFoods card-body">
-                                <h5 class="card-title">Cart</h5>
+                            <div class="addedFoods card-body text-center">
+                              <i class="fas fa-shopping-cart grey-text"></i>
+                                <h5 class="card-title" style="font-weight:800; font-size: 2em;">Food Cart Summary</h5>
                                 <ul class="foodList">
                                 </ul>
                                 <div class="totalPrice">
