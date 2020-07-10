@@ -1,6 +1,6 @@
 const selectOptions = document.querySelector("#kitchens");
 const kitchenMenu = document.querySelector(".kitchen-menu");
-
+let currentGeoLoc = ""
 // We need to display the following food cards with the following info: Food Name Description Price Available we don't need to add the kitchen that doesn’t have any available food
 
 //1. Get the container
@@ -335,7 +335,7 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
 
     // console.log(foodName, count)
     }
-    const submitForm = document.querySelector('#modalEdit');
+  const submitForm = document.querySelector('#modalEdit');
   submitForm.addEventListener('submit', (event) => {
     event.preventDefault()
   
@@ -348,12 +348,14 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
         return total 
         
     }).reduce((v,a)=> a +v)
-
+    console.log("-----------CLOSE MODAL")
+    $('#editForm').modal('hide');
 
     const editObj = {
       total_price: total
     }
     editFetch(editObj,lastOrderObj)
+    submitForm.reset()
   })
   const deleteBtn = document.querySelector("#delete");
   deleteBtn.addEventListener("click", (e) => {
@@ -385,13 +387,6 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     .then(resp => resp.json()).then(console.log)
 }
 
-// const submitBtn = document.querySelector('#submitBtn');
-//  $("#submitBtn").addEventListener('submit',(e) {
-//     e.preventDefault();
-//     $("#editForm").className = "hide"
-//      // $('#IDModal').modal('hide');
-// })
-
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -402,10 +397,13 @@ function getLocation() {
 }
 
 function showPosition(position) {
+  const searchForm = document.querySelector('#searchForm')
   console.log(position.coords.latitude, position.coords.longitude);
-  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=#`)
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCbRziLV8j59Uv2bA1akJ4idLqVRC2R5lc`)
   .then(resp=> resp.json()).then(locationObj => {
     console.log(parseInt(locationObj.results[0].address_components[7].long_name))
+    currentGeoLoc = locationObj.results[0].address_components[7].long_name
+    searchForm.querySelector('input[name = zipcode]').value = currentGeoLoc
   })
 }
 

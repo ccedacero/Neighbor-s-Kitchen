@@ -83,3 +83,7 @@ btn btn-secondary:hover {
 }
 
 
+.foodContainer {
+  background-color: bisque;
+  margin-bottom: 0;
+}
