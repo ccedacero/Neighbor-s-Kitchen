@@ -350,12 +350,11 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
     }).reduce((v,a)=> a +v)
     console.log("-----------CLOSE MODAL")
     $('#editForm').modal('hide');
-
     const editObj = {
       total_price: total
     }
     editFetch(editObj,lastOrderObj)
-    submitForm.reset()
+    // submitForm.reset()
   })
   const deleteBtn = document.querySelector("#delete");
   deleteBtn.addEventListener("click", (e) => {

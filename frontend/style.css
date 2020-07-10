@@ -31,7 +31,7 @@ font-family: 'Cormorant', serif;
 
 .addFood:hover{
   transition: all 0.4s ease 0s;
-  background-color: #d39785;
+  background-color: #FF6633;
 }
 .fa-utensils:hover {
   color: green;
