@@ -26,7 +26,7 @@ font-family: 'Cormorant', serif;
   margin-left: 6em;
   height:3.1em;
   radius: .5em;
-  background: #430098;
+  background: #8B4513;
 }
 
 .addFood:hover{
@@ -71,11 +71,12 @@ li {
 }
 
 body {
-background: linear-gradient(180deg,rgba(97,97,115,.95) 15%,rgba(165,141,21,.43) 85%),url("https://jetfuelcatering.com/wp-content/uploads/2018/08/food-background.jpg") left top no-repeat,
-url("https://cdn.pixabay.com/photo/2015/10/15/21/37/texture-990104_960_720.jpg") right bottom;
+/* background: linear-gradient(180deg,rgba(97,97,115,.95) 15%,rgba(165,141,21,.43) 85%),url("https://jetfuelcatering.com/wp-content/uploads/2018/08/food-background.jpg") left top no-repeat,
+url("https://cdn.pixabay.com/photo/2015/10/15/21/37/texture-990104_960_720.jpg") right bottom; */
 /* background: url("https://cdn.pixabay.com/photo/2015/10/15/21/37/texture-990104_960_720.jpg") */
+background: linear-gradient(180deg,rgba(80,39,26,0.55) 15%,rgba(165,141,21,.43) 85%),url("https://jetfuelcatering.com/wp-content/uploads/2018/08/food-background.jpg") left top no-repeat,
+url("https://cdn.pixabay.com/photo/2015/10/15/21/37/texture-990104_960_720.jpg") right bottom;
 }
-
 btn btn-secondary:hover {
   transition: 1sec;
   color: #000;

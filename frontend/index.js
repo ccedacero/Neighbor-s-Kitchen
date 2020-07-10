@@ -386,48 +386,21 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
 }
 
 
-    
-
-    
-  
-  
-/*****editOrder needs to be made */
-// function editOrder(editBtn) {
-//   let form = document.querySelector('#editForm').querySelectorAll('input');
-//   let name = form[0].value;
-//   let email = form[1].value;
-//   let phone = form[2].value;
-//   let location = form[3].value;
-//   let subtotal = form[4].value;
-//   debugger
-  
-// }
-// const date = new Date();
-
-//     const orderPayload = {
-//     method: 'POST',
-//     // mode: 'cors', // no-cors, *cors, same-origin
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//    body: JSON.stringify(orderObj)
-// }   
-//      fetch('http://localhost:3000/orders', orderPayload)
-//      .then(resp => resp.json()).then(orderResp => {
-//       createFoodOrder(orderResp)
-//      })
 
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
 
+function showPosition(position) {
+  console.log(position.coords.latitude, position.coords.longitude);
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCbRziLV8j59Uv2bA1akJ4idLqVRC2R5lc`)
+  .then(resp=> resp.json()).then(locationObj => {
+    console.log(parseInt(locationObj.results[0].address_components[7].long_name))
+  })
+}
 
-
-
-
-
-
-
-
-
-//edit order, remove from list before adding 
-//edit delete order 
-// 

@@ -19,7 +19,7 @@
   <title>Document</title>
 </head>
 
-<body>
+<body onload=getLocation()>
   <div class=" container">
     <button type="button" class="editBtn btn btn-primary" data-toggle="modal" data-target="#editForm">
       Edit Current Order
@@ -111,18 +111,13 @@
         </div>
         <div class="md-form mb-3 text-center">
           <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="submit" value="submit" class="btn-success" >
+          <input type="submit" id="submitBtn" value="submit" class="btn-success" >
           <input type="button" id="delete" data-dismiss="modal" class="btn-danger" value="delete">
         </div>
       </div>
      </div>
   </div>
   </form>
-
-  <!-- <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Edit Order</a>
-</div> -->
-
 </body>
 
 </html>
