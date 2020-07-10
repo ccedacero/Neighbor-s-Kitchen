@@ -338,27 +338,43 @@ function renderFoodOrders(lastOrderObj, uniqeFoodCount){
   const submitForm = document.querySelector('#modalEdit');
   submitForm.addEventListener('submit', (event) => {
     event.preventDefault()
-  
     
     let arr = [...event.target.querySelectorAll("#foodOrderList li")];
     let total = arr.map(e => {
       var price = parseFloat(e.querySelector("span").innerText);
       var count = parseFloat(e.querySelector("input").value);
       var total = price * count; 
+      // debugger
+      console.log('inside total array----before parse float ', e.querySelector("input").value)
+      console.log("inside total array----",price, count, total)
         return total 
         
     }).reduce((v,a)=> a +v)
-    console.log("-----------CLOSE MODAL")
-    $('#editForm').modal('hide');
+
+   
     const editObj = {
       total_price: total
     }
     editFetch(editObj,lastOrderObj)
-    // submitForm.reset()
+    
+    $('#editForm').modal('hide');
   })
   const deleteBtn = document.querySelector("#delete");
   deleteBtn.addEventListener("click", (e) => {
     // e.preventDefault()
+    const submitForm = document.querySelector('#modalEdit');
+
+    //reseting the form
+    submitForm.reset()
+    const username = document.querySelector('#editUsername')
+    const subtotal = document.querySelector('h6#subtotal')
+    const foodOrderList = document.querySelector('#foodOrderList ul')
+    username.textContent = `User: `;
+    subtotal.textContent = `Order Total $`;
+    foodOrderList.innerHTML = ''
+    //reseting the form
+    
+    
     const deleteObj = {
     method: 'DELETE',
     // mode: 'cors', // no-cors, *cors, same-origin
