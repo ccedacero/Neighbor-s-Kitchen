@@ -4,7 +4,7 @@ A frontend demo app that connects NYC cooks and chefs with food enthusiasts , al
 while giving food enthusiasts the opportunity to experience new and unique foods from home. 
 
 ![The landing page for Neighbor's Kitchen](https://i.imgur.com/MwODixc.png )
- &nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.imgur.com/Es8gs8S.png" alt="neighbor's kitchen menu" width="450" height="300"/>  <img src="https://i.imgur.com/yVgHeUH.png" alt="neighbor's kitchen menu" width="450" height="300"/>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.imgur.com/Es8gs8S.png" alt="neighbor's kitchen menu" width="450" height="300"/>  <img src="https://i.imgur.com/yVgHeUH.png" alt="neighbor's kitchen menu" width="450" height="300"/>
 
 ### Features
 
