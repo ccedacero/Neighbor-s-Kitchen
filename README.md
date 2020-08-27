@@ -7,7 +7,7 @@ A frontend demo app that connects NYC cooks and chefs with food enthusiasts , al
 
 ### Features
 
-- User based location using geolocation API and Google's geocoding API (api key has been included for security purposes) 
+- User based location using geolocation API and Google's geocoding API (api key has been excluded for security purposes) 
 - Users are able to filter their desired food types and narrow them down to their zipcode 
 - Users are able to browse a menu with a brief description of each meal
 - Users are able to add desired quantity of chosen meals to their food cart
